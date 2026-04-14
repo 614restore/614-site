@@ -3,10 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --brand-blue: #1e40af;
-  --brand-orange: #ea580c;
-  --brand-dark: #0f172a;
-  --brand-gray: #f8fafc;
+  --brand-red: #b91c1c;
+  --brand-red-dark: #7f1d1d;
+  --brand-black: #050509;
+  --brand-gold: #facc15;
+  --brand-silver: #d4d4d8;
+  --brand-gray: #111827;
 }
 
 @layer base {
@@ -14,21 +16,21 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-white text-slate-900;
+    @apply bg-[#050509] text-slate-100;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
+    @apply bg-red-700 hover:bg-red-600 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
   }
   .btn-orange {
-    @apply bg-orange-600 hover:bg-orange-700 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
+    @apply bg-amber-500 hover:bg-amber-400 text-black font-semibold px-6 py-3 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
   }
   .section-heading {
-    @apply text-3xl md:text-4xl font-bold text-slate-900 mb-4;
+    @apply text-3xl md:text-4xl font-bold text-white mb-4;
   }
   .card {
-    @apply bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 p-6;
+    @apply bg-[#111827] rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 p-6 border border-slate-700/60;
   }
 }
