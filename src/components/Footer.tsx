@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Footer() {
   return (
@@ -8,13 +9,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              {/* Replace with: <img src="/614logo.jpg" className="h-10 w-auto" alt="614 Restore" /> */}
-              <div className="w-9 h-9 bg-red-700 rounded-lg flex items-center justify-center">
-                <span className="text-white font-black text-xs">614</span>
-              </div>
-              <div>
-                <div className="text-white font-bold">614 Restore &amp; Tech</div>
-              </div>
+              <Image src="/614logo.png" width={160} height={40} style={{ height: '40px', width: 'auto' }} alt="614 Restore & Tech" />
             </div>
             <p className="text-sm leading-relaxed text-slate-500">
               Columbus, OH. Roofing services + contractor software.
