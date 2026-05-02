@@ -39,14 +39,14 @@ export default function ServicesSection() {
   ]
 
   return (
-    <section id="services" className="py-24 bg-[#0a0a0a] border-y border-red-900/40">
+    <section id="services" className="py-24 bg-[#0a0a0a] border-y border-scarlet/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <span className="inline-block bg-red-900/50 text-amber-300 text-sm font-semibold px-4 py-1.5 rounded-full mb-4 border border-red-700/50">
+          <span className="inline-block bg-scarlet/20 text-gold text-sm font-semibold px-4 py-1.5 rounded-full mb-4 border border-scarlet/40">
             614 Restore — Roofing Services
           </span>
           <h2 className="section-heading">Professional Roofing,<br />Done Right.</h2>
-          <p className="text-slate-300 text-lg max-w-2xl mx-auto">
+          <p className="text-silver text-lg max-w-2xl mx-auto">
             Columbus&apos;s trusted roofing contractor for residential and commercial projects.
             Licensed, insured, and local.
           </p>
@@ -54,21 +54,21 @@ export default function ServicesSection() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service) => (
-            <div key={service.title} className="card relative group hover:-translate-y-1 transition-transform duration-300 hover:border-red-700/60">
+            <div key={service.title} className="card relative group hover:-translate-y-1 transition-transform duration-300 hover:border-scarlet/50">
               {service.badge && (
-                <span className="absolute top-4 right-4 bg-red-700 text-white text-xs font-bold px-2 py-1 rounded-full">
+                <span className="absolute top-4 right-4 bg-scarlet text-white text-xs font-bold px-2 py-1 rounded-full">
                   {service.badge}
                 </span>
               )}
               <div className="text-3xl mb-3">{service.icon}</div>
-              <h3 className="font-bold text-slate-100 text-lg mb-2">{service.title}</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">{service.description}</p>
+              <h3 className="font-bold text-white text-lg mb-2">{service.title}</h3>
+              <p className="text-silver text-sm leading-relaxed">{service.description}</p>
             </div>
           ))}
         </div>
 
         <div className="mt-12 text-center">
-          <a href="#contact" className="btn-primary inline-block">
+          <a href="/contact" className="btn-primary inline-block">
             Schedule a Free Inspection
           </a>
         </div>

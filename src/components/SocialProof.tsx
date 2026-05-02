@@ -31,31 +31,31 @@ export default function SocialProof() {
   ]
 
   return (
-    <section className="py-24 bg-black border-t border-red-900/50">
+    <section className="py-24 bg-black border-t border-scarlet/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-amber-300 mb-4">Trusted by Homeowners &amp; Contractors</h2>
-          <p className="text-slate-300 text-lg">Real results from real customers.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gold mb-4">Trusted by Homeowners &amp; Contractors</h2>
+          <p className="text-silver text-lg">Real results from real customers.</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {testimonials.map((t) => (
-            <div key={t.name} className="bg-[#111827] rounded-2xl p-6 border border-red-900/40 hover:border-amber-400/50 transition-colors shadow-md">
+            <div key={t.name} className="bg-[#111827] rounded-2xl p-6 border border-scarlet/20 hover:border-gold/40 transition-colors shadow-md">
               <div className="flex gap-1 mb-4">
                 {Array.from({ length: t.stars }).map((_, i) => (
-                  <span key={i} className="text-amber-400 text-lg">★</span>
+                  <span key={i} className="text-gold text-lg">★</span>
                 ))}
               </div>
-              <p className="text-slate-300 text-sm leading-relaxed mb-4">&ldquo;{t.text}&rdquo;</p>
+              <p className="text-silver text-sm leading-relaxed mb-4">&ldquo;{t.text}&rdquo;</p>
               <div className="flex items-center gap-2">
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white ${
-                  t.type === 'roofing' ? 'bg-red-700' : 'bg-amber-500'
+                  t.type === 'roofing' ? 'bg-scarlet' : 'bg-gold'
                 }`}>
                   {t.name.charAt(0)}
                 </div>
                 <div>
                   <div className="text-white text-sm font-semibold">{t.name}</div>
-                  <div className="text-slate-400 text-xs">{t.location}</div>
+                  <div className="text-silver/60 text-xs">{t.location}</div>
                 </div>
               </div>
             </div>
@@ -64,10 +64,10 @@ export default function SocialProof() {
 
         {/* Partner badges */}
         <div className="mt-16 text-center">
-          <p className="text-slate-500 text-sm mb-6 tracking-[0.2em] uppercase">Trusted Partners &amp; Certifications</p>
+          <p className="text-silver/40 text-sm mb-6 tracking-[0.2em] uppercase">Trusted Partners &amp; Certifications</p>
           <div className="flex flex-wrap justify-center gap-8 opacity-60">
             {['GAF Certified', 'Owens Corning', 'CertainTeed', 'BBB Accredited', 'State Licensed'].map((badge) => (
-              <span key={badge} className="text-slate-300 font-semibold text-sm">{badge}</span>
+              <span key={badge} className="text-silver font-semibold text-sm">{badge}</span>
             ))}
           </div>
         </div>
