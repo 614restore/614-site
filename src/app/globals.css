@@ -3,12 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --brand-red: #b91c1c;
-  --brand-red-dark: #7f1d1d;
-  --brand-black: #050509;
-  --brand-gold: #facc15;
-  --brand-silver: #d4d4d8;
-  --brand-gray: #111827;
+  --brand-scarlet: #C41E3A;
+  --brand-gold: #FFD700;
+  --brand-silver: #C0C0C0;
+  --brand-gray: #808080;
+  --brand-black: #000000;
 }
 
 @layer base {
@@ -22,10 +21,10 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-red-700 hover:bg-red-600 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
+    @apply bg-scarlet hover:bg-scarlet/80 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
   }
-  .btn-orange {
-    @apply bg-amber-500 hover:bg-amber-400 text-black font-semibold px-6 py-3 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
+  .btn-gold {
+    @apply bg-gold hover:bg-gold/80 text-black font-semibold px-6 py-3 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
   }
   .section-heading {
     @apply text-3xl md:text-4xl font-bold text-white mb-4;
