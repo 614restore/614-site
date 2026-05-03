@@ -94,7 +94,7 @@ export default function SoftwareSection() {
               </ul>
 
               <Link
-                href={product.href}
+                href="/software"
                 className={product.color === 'red' ? 'btn-primary block text-center' : 'btn-orange block text-center'}
               >
                 {product.cta}

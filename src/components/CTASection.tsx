@@ -57,10 +57,10 @@ export default function CTASection() {
               ))}
             </ul>
             <div className="flex flex-col gap-3">
-              <a href="/software/trussctr" className="bg-amber-500 hover:bg-amber-400 text-black font-bold py-3 px-6 rounded-lg text-center transition-colors shadow-md">
+              <a href="/software" className="bg-amber-500 hover:bg-amber-400 text-black font-bold py-3 px-6 rounded-lg text-center transition-colors shadow-md">
                 ⚡ Get Early Access to TrussCTR
               </a>
-              <a href="/software/quotemgr" className="bg-white/10 hover:bg-white/20 text-slate-200 font-semibold py-3 px-6 rounded-lg text-center transition-colors border border-slate-500/50">
+              <a href="/software" className="bg-white/10 hover:bg-white/20 text-slate-200 font-semibold py-3 px-6 rounded-lg text-center transition-colors border border-slate-500/50">
                 📊 Try QuoteMGR Free
               </a>
             </div>

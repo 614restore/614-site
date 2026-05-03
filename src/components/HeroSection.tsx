@@ -5,7 +5,6 @@ export default function HeroSection() {
     <section className="relative min-h-screen bg-black flex items-center overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-[#0d0d0d] to-black" />
-      <div className="absolute inset-0 bg-[url('/roof-bg.jpg')] bg-cover bg-center opacity-10" />
 
       {/* Animated orbs */}
       <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-red-700/20 rounded-full blur-3xl animate-pulse" />
