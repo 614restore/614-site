@@ -1,66 +1,91 @@
-import Link from 'next/link'
+import { Phone, Mail, MapPin } from 'lucide-react'
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear()
+
   return (
-    <footer className="bg-black text-slate-400 py-16 border-t border-red-900/40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-4 gap-10 mb-12">
-          {/* Brand */}
-          <div className="md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              {/* Replace with: <img src="/614logo.jpg" className="h-10 w-auto" alt="614 Restore" /> */}
-              <div className="w-9 h-9 bg-red-700 rounded-lg flex items-center justify-center">
-                <span className="text-white font-black text-xs">614</span>
-              </div>
+    <footer className="bg-steel-950 text-steel-400">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="lg:col-span-1">
+            <div className="flex items-center gap-3 mb-4">
+              <img
+                src="/images/logo.png"
+                alt="614 Restore LLC"
+                className="h-12 w-12 object-contain"
+              />
               <div>
-                <div className="text-white font-bold">614 Restore &amp; Tech</div>
+                <span className="text-xl font-heading font-bold text-white">
+                  614 <span className="text-red-500">Restore</span>
+                </span>
+                <span className="block text-[10px] text-steel-500 uppercase tracking-[0.2em]">
+                  LLC
+                </span>
               </div>
             </div>
-            <p className="text-sm leading-relaxed text-slate-500">
-              Columbus, OH. Roofing services + contractor software.
-              One company. Two products. One loop.
+            <p className="text-steel-500 text-sm leading-relaxed mb-6">
+              Columbus, Ohio&apos;s trusted roofing and restoration company.
+              Protecting homes and helping neighbors — one roof at a time.
             </p>
           </div>
 
-          {/* Roofing */}
           <div>
-            <h4 className="text-amber-400 font-semibold mb-4 text-sm uppercase tracking-wide">Roofing</h4>
+            <h4 className="font-heading font-bold text-white text-lg mb-4">Services</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/roofing" className="hover:text-red-400 transition-colors">Services Overview</Link></li>
-              <li><Link href="/roofing#storm" className="hover:text-red-400 transition-colors">Storm Damage</Link></li>
-              <li><Link href="/roofing#insurance" className="hover:text-red-400 transition-colors">Insurance Claims</Link></li>
-              <li><Link href="#contact" className="hover:text-red-400 transition-colors">Free Inspection</Link></li>
+              <li><a href="/#services" className="hover:text-red-400 transition">Residential Roofing</a></li>
+              <li><a href="/#services" className="hover:text-red-400 transition">Commercial Roofing</a></li>
+              <li><a href="/#services" className="hover:text-red-400 transition">Siding Installation</a></li>
+              <li><a href="/#services" className="hover:text-red-400 transition">Gutters &amp; Downspouts</a></li>
+              <li><a href="/#services" className="hover:text-red-400 transition">Storm Restoration</a></li>
+              <li><a href="/#services" className="hover:text-red-400 transition">Insurance Assistance</a></li>
             </ul>
           </div>
 
-          {/* Software */}
           <div>
-            <h4 className="text-amber-400 font-semibold mb-4 text-sm uppercase tracking-wide">Software</h4>
+            <h4 className="font-heading font-bold text-white text-lg mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/software" className="hover:text-red-400 transition-colors">Products Overview</Link></li>
-              <li><Link href="/software/trussctr" className="hover:text-red-400 transition-colors">TrussCTR CRM</Link></li>
-              <li><Link href="/software/quotemgr" className="hover:text-red-400 transition-colors">QuoteMGR</Link></li>
-              <li><Link href="/pricing" className="hover:text-red-400 transition-colors">Pricing</Link></li>
+              <li><a href="/" className="hover:text-red-400 transition">Home</a></li>
+              <li><a href="/#about" className="hover:text-red-400 transition">About Us</a></li>
+              <li><a href="/#why-us" className="hover:text-red-400 transition">Why Choose Us</a></li>
+              <li><a href="/#software" className="hover:text-red-400 transition">Our Software</a></li>
+              <li><a href="/#contact" className="hover:text-red-400 transition">Contact</a></li>
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
-            <h4 className="text-amber-400 font-semibold mb-4 text-sm uppercase tracking-wide">Contact</h4>
-            <ul className="space-y-2 text-sm">
-              <li className="flex items-center gap-2">📍 Columbus, Ohio</li>
-              <li><a href="tel:+16148088899" className="hover:text-red-400 transition-colors">📞 (614) 808-8899</a></li>
-              <li><a href="mailto:info@614restore.com" className="hover:text-red-400 transition-colors">✉️ info@614restore.com</a></li>
+            <h4 className="font-heading font-bold text-white text-lg mb-4">Contact</h4>
+            <ul className="space-y-4 text-sm">
+              <li>
+                <a href="tel:6148088899" className="flex items-center gap-3 hover:text-red-400 transition">
+                  <Phone className="w-4 h-4 text-red-500" />
+                  (614) 808-8899
+                </a>
+              </li>
+              <li>
+                <a href="mailto:info@614restore.com" className="flex items-center gap-3 hover:text-red-400 transition">
+                  <Mail className="w-4 h-4 text-red-500" />
+                  info@614restore.com
+                </a>
+              </li>
+              <li>
+                <div className="flex items-center gap-3">
+                  <MapPin className="w-4 h-4 text-red-500 flex-shrink-0" />
+                  Columbus, OH &amp; Central Ohio
+                </div>
+              </li>
             </ul>
           </div>
         </div>
+      </div>
 
-        <div className="border-t border-red-900/30 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-slate-600">© 2026 614 Restore &amp; Tech. All rights reserved.</p>
-          <div className="flex gap-6 text-sm">
-            <Link href="/privacy" className="hover:text-amber-400 transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-amber-400 transition-colors">Terms</Link>
-          </div>
+      <div className="border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-steel-500 text-sm">
+            &copy; {currentYear} 614 Restore LLC. All rights reserved.
+          </p>
+          <p className="text-steel-600 text-xs">
+            Proudly serving Columbus, Ohio and surrounding communities
+          </p>
         </div>
       </div>
     </footer>

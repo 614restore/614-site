@@ -1,62 +1,107 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { Phone, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 
 export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const links = [
+    { label: 'Home', href: '/' },
+    { label: 'Services', href: '/#services' },
+    { label: 'About', href: '/#about' },
+    { label: 'Why Us', href: '/#why-us' },
+    { label: 'Software', href: '/#software' },
+    { label: 'Contact', href: '/#contact' },
+  ]
+
   return (
-    <nav className="fixed top-0 w-full z-50 bg-black/95 backdrop-blur-sm border-b border-red-900/60">
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-steel-900/95 backdrop-blur-md shadow-2xl py-2'
+          : 'bg-transparent py-4'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            {/* Replace with: <img src="/614logo.jpg" className="h-10 w-auto" alt="614 Restore" /> */}
-            <div className="w-10 h-10 bg-red-700 rounded-lg flex items-center justify-center">
-              <span className="text-white font-black text-sm">614</span>
+        <div className="flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-3 group">
+            <img
+              src="/images/logo.png"
+              alt="614 Restore LLC"
+              className="h-14 w-14 object-contain drop-shadow-lg group-hover:scale-105 transition-transform"
+            />
+            <div className="hidden sm:block">
+              <span className="text-xl font-heading font-bold text-white tracking-wide">
+                614 <span className="text-red-500">Restore</span>
+              </span>
+              <span className="block text-[10px] text-steel-400 uppercase tracking-[0.2em]">
+                LLC
+              </span>
             </div>
-            <div>
-              <span className="text-white font-bold text-lg leading-none block">614 Restore</span>
-              <span className="text-amber-400 text-xs">&amp; Tech</span>
-            </div>
+          </Link>
+
+          <div className="hidden lg:flex items-center gap-1">
+            {links.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="px-4 py-2 text-sm font-medium text-steel-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="#services" className="text-slate-300 hover:text-red-400 transition-colors text-sm font-medium">Services</Link>
-            <Link href="#software" className="text-slate-300 hover:text-red-400 transition-colors text-sm font-medium">Software</Link>
-            <Link href="/roofing" className="text-slate-300 hover:text-red-400 transition-colors text-sm font-medium">Roofing</Link>
-            <Link href="/software" className="text-slate-300 hover:text-red-400 transition-colors text-sm font-medium">Products</Link>
-            <Link href="#contact" className="btn-primary text-sm py-2 px-4">
-              Get a Free Quote
-            </Link>
+          <div className="hidden lg:flex items-center gap-4">
+            <a
+              href="tel:6148088899"
+              className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-lg font-semibold text-sm transition-all shadow-lg hover:scale-105"
+            >
+              <Phone className="w-4 h-4" />
+              (614) 808-8899
+            </a>
           </div>
 
-          {/* Mobile menu button */}
           <button
-            className="md:hidden text-slate-300 hover:text-red-400"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
+            className="lg:hidden text-white p-2 rounded-lg hover:bg-white/10"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {mobileOpen
-                ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />}
-            </svg>
+            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
-
-        {/* Mobile Menu */}
-        {mobileOpen && (
-          <div className="md:hidden pb-4 pt-2 flex flex-col gap-3 border-t border-red-900/40 mt-1">
-            <Link href="#services" className="text-slate-300 hover:text-red-400 py-2 text-sm" onClick={() => setMobileOpen(false)}>Services</Link>
-            <Link href="#software" className="text-slate-300 hover:text-red-400 py-2 text-sm" onClick={() => setMobileOpen(false)}>Software</Link>
-            <Link href="/roofing" className="text-slate-300 hover:text-red-400 py-2 text-sm" onClick={() => setMobileOpen(false)}>Roofing</Link>
-            <Link href="/software" className="text-slate-300 hover:text-red-400 py-2 text-sm" onClick={() => setMobileOpen(false)}>Products</Link>
-            <Link href="#contact" className="btn-primary text-sm text-center" onClick={() => setMobileOpen(false)}>Get a Free Quote</Link>
-          </div>
-        )}
       </div>
+
+      {mobileOpen && (
+        <div className="lg:hidden bg-steel-900/98 backdrop-blur-lg border-t border-white/10 mt-2">
+          <div className="px-4 py-6 space-y-2">
+            {links.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className="block px-4 py-3 text-steel-300 hover:text-white hover:bg-white/10 rounded-lg font-medium transition"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <a
+              href="tel:6148088899"
+              className="flex items-center justify-center gap-2 bg-red-600 text-white px-5 py-3 rounded-lg font-semibold mt-4"
+            >
+              <Phone className="w-4 h-4" />
+              (614) 808-8899
+            </a>
+          </div>
+        </div>
+      )}
     </nav>
   )
 }
