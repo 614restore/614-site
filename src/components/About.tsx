@@ -1,8 +1,9 @@
 import { Heart, Users, Award, TrendingUp } from 'lucide-react'
+import Link from 'next/link'
 
 export default function About() {
   return (
-    <section id="about" className="py-24 bg-steel-50">
+    <section id="about" className="py-24 bg-gradient-to-br from-steel-50 via-white to-steel-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left: Portrait */}
@@ -66,6 +67,15 @@ export default function About() {
                   </div>
                 </div>
               ))}
+            </div>
+
+            <div className="mt-10">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg hover:scale-105"
+              >
+                Request Inspection
+              </Link>
             </div>
           </div>
         </div>

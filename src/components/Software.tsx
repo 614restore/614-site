@@ -1,4 +1,5 @@
 import { ArrowRight, Sparkles, Camera } from 'lucide-react'
+import Link from 'next/link'
 
 const tools = [
   {
@@ -57,9 +58,10 @@ export default function Software() {
 
         <div className="grid lg:grid-cols-3 gap-8">
           {tools.map((tool, index) => (
-            <div
+            <Link
               key={index}
-              className="group bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-steel-100 hover:border-red-200"
+              href={tool.link}
+              className="group bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-steel-100 hover:border-red-200 block"
             >
               <div className="flex items-center justify-between mb-6">
                 {tool.logo ? (
@@ -95,7 +97,11 @@ export default function Software() {
                   </li>
                 ))}
               </ul>
-            </div>
+
+              <span className="inline-flex items-center gap-1 text-red-600 text-sm font-semibold mt-4 group-hover:gap-2 transition-all">
+                Learn more →
+              </span>
+            </Link>
           ))}
         </div>
 
