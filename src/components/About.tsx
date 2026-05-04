@@ -8,7 +8,7 @@ export default function About() {
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src="/images/about-jeff.jpg"
+                src="/images/portrait-jeff.jpg"
                 alt="Jeffrey Newell - Owner of 614 Restore LLC"
                 className="w-full h-[500px] object-cover"
               />
