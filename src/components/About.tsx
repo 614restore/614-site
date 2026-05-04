@@ -13,10 +13,28 @@ export default function About() {
         <div className="absolute inset-0 bg-gradient-to-r from-steel-950/85 via-steel-900/70 to-steel-950/50" />
       </div>
 
-      {/* Content - portrait on right, text on left */}
+      {/* Content - portrait on left, text on right */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full">
         <div className="flex flex-col lg:flex-row items-center gap-16">
-          {/* Left: Text content */}
+          {/* Left: Portrait */}
+          <div className="flex-shrink-0 relative">
+            <div className="relative w-[320px] h-[500px] rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
+              <img
+                src="/images/portrait-final.jpg"
+                alt="Jeff - Owner of 614 Restore LLC"
+                className="w-full h-full object-cover object-top"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+            </div>
+            <div className="absolute -inset-2 border-2 border-red-500/30 rounded-2xl -z-10" />
+            <div className="absolute -bottom-4 -left-4 bg-red-600 text-white p-5 rounded-xl shadow-lg max-w-[200px]">
+              <Heart className="w-6 h-6 mb-1" />
+              <p className="font-heading font-bold text-sm">People First</p>
+              <p className="text-red-200 text-xs">Always looking out for neighbors</p>
+            </div>
+          </div>
+
+          {/* Right: Text content */}
           <div className="flex-1 max-w-2xl">
             <span className="inline-block text-red-400 font-semibold text-sm uppercase tracking-[0.15em] mb-3">
               Our Story
@@ -60,25 +78,6 @@ export default function About() {
                   </div>
                 </div>
               ))}
-            </div>
-          </div>
-
-          {/* Right: Portrait overlay */}
-          <div className="flex-shrink-0 relative">
-            <div className="relative w-[320px] h-[500px] rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
-              <img
-                src="/images/portrait-final.jpg"
-                alt="Jeff - Owner of 614 Restore LLC"
-                className="w-full h-full object-cover object-top"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-            </div>
-            {/* Decorative border */}
-            <div className="absolute -inset-2 border-2 border-red-500/30 rounded-2xl -z-10" />
-            <div className="absolute -bottom-4 -right-4 bg-red-600 text-white p-5 rounded-xl shadow-lg max-w-[200px]">
-              <Heart className="w-6 h-6 mb-1" />
-              <p className="font-heading font-bold text-sm">People First</p>
-              <p className="text-red-200 text-xs">Always looking out for neighbors</p>
             </div>
           </div>
         </div>
