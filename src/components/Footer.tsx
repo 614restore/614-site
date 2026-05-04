@@ -49,8 +49,8 @@ export default function Footer() {
             <h4 className="text-amber-400 font-semibold mb-4 text-sm uppercase tracking-wide">Contact</h4>
             <ul className="space-y-2 text-sm">
               <li className="flex items-center gap-2">📍 Columbus, Ohio</li>
-              <li><a href="tel:6141234567" className="hover:text-red-400 transition-colors">📞 (614) 123-4567</a></li>
-              <li><a href="mailto:hello@614restore.com" className="hover:text-red-400 transition-colors">✉️ hello@614restore.com</a></li>
+              <li><a href="tel:+16148088899" className="hover:text-red-400 transition-colors">📞 (614) 808-8899</a></li>
+              <li><a href="mailto:info@614restore.com" className="hover:text-red-400 transition-colors">✉️ info@614restore.com</a></li>
             </ul>
           </div>
         </div>

@@ -46,7 +46,7 @@ export default function RoofingPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <a href="/contact" className="btn-primary text-center">Get a Free Inspection</a>
-                <a href="tel:+16145551234" className="bg-[#1a1a1a] hover:bg-[#222] text-white font-semibold px-6 py-3 rounded-lg transition-all text-center border border-slate-600">
+                <a href="tel:+16148088899" className="bg-[#1a1a1a] hover:bg-[#222] text-white font-semibold px-6 py-3 rounded-lg transition-all text-center border border-slate-600">
                   📞 Call Us Now
                 </a>
               </div>
@@ -197,8 +197,8 @@ export default function RoofingPage() {
           <p className="text-slate-300 text-xl mb-8">No obligation. No pressure. Just an honest assessment of your roof.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="/contact" className="btn-primary inline-block text-center">Request Free Inspection</a>
-            <a href="tel:+16145551234" className="bg-[#1a1a1a] hover:bg-[#222] text-white font-semibold px-6 py-3 rounded-lg transition-all text-center border border-slate-600">
-              📞 Call (614) 555-1234
+            <a href="tel:+16148088899" className="bg-[#1a1a1a] hover:bg-[#222] text-white font-semibold px-6 py-3 rounded-lg transition-all text-center border border-slate-600">
+              📞 Call (614) 808-8899
             </a>
           </div>
         </div>

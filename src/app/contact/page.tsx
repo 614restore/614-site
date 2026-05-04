@@ -125,8 +125,8 @@ export default function ContactPage() {
                   {
                     icon: '📞',
                     label: 'Phone',
-                    value: '(614) 555-1234',
-                    href: 'tel:+16145551234',
+                    value: '(614) 808-8899',
+                    href: 'tel:+16148088899',
                   },
                   {
                     icon: '✉️',
@@ -160,7 +160,7 @@ export default function ContactPage() {
               <div className="bg-[#111] rounded-2xl border border-slate-700/60 p-6">
                 <h3 className="text-white font-bold mb-4">Quick Actions</h3>
                 <div className="space-y-3">
-                  <a href="tel:+16145551234" className="flex items-center gap-3 text-slate-300 hover:text-amber-400 transition-colors">
+                  <a href="tel:+16148088899" className="flex items-center gap-3 text-slate-300 hover:text-amber-400 transition-colors">
                     <span>📞</span>
                     <span>Call us directly — fastest response</span>
                   </a>
