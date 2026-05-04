@@ -1,45 +1,39 @@
-@import "tailwindcss";
-
-@theme {
-  --color-brand-50: #fef2f2;
-  --color-brand-100: #fee2e2;
-  --color-brand-200: #fecaca;
-  --color-brand-300: #fca5a5;
-  --color-brand-400: #f87171;
-  --color-brand-500: #ef4444;
-  --color-brand-600: #dc2626;
-  --color-brand-700: #b91c1c;
-  --color-brand-800: #991b1b;
-  --color-brand-900: #7f1d1d;
-  --color-brand-950: #450a0a;
-  --color-steel-50: #f8fafc;
-  --color-steel-100: #f1f5f9;
-  --color-steel-200: #e2e8f0;
-  --color-steel-300: #cbd5e1;
-  --color-steel-400: #94a3b8;
-  --color-steel-500: #64748b;
-  --color-steel-600: #475569;
-  --color-steel-700: #334155;
-  --color-steel-800: #1e293b;
-  --color-steel-900: #0f172a;
-  --color-steel-950: #020617;
-
-  --font-heading: 'Oswald', sans-serif;
-  --font-body: 'Inter', sans-serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap');
 
-html {
-  scroll-behavior: smooth;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-body text-steel-900 antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
 }
 
-body {
-  font-family: var(--font-body);
-}
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
+  }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
+  .animate-fade-in {
+    animation: fade-in 1s ease-out forwards;
+  }
+
+  .animate-slide-in-left {
+    animation: slide-in-left 0.8s ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.8s ease-out forwards;
+  }
 }
 
 @keyframes fade-in-up {
@@ -54,8 +48,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slide-in-left {
@@ -78,22 +76,6 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 1;
     transform: translateX(0);
   }
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.8s ease-out forwards;
-}
-
-.animate-fade-in {
-  animation: fade-in 1s ease-out forwards;
-}
-
-.animate-slide-in-left {
-  animation: slide-in-left 0.8s ease-out forwards;
-}
-
-.animate-slide-in-right {
-  animation: slide-in-right 0.8s ease-out forwards;
 }
 
 .delay-100 { animation-delay: 0.1s; }
