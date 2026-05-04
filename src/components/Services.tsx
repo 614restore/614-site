@@ -1,9 +1,11 @@
 import { Home, Layers, Droplets, CloudLightning, FileCheck, Wrench } from 'lucide-react'
+import Link from 'next/link'
 
 const services = [
   {
     icon: Home,
     title: 'Residential Roofing',
+    href: '/portfolio?cat=residential',
     description:
       'Complete roof replacements, repairs, and maintenance for homes across Columbus. We use premium materials and back every job with solid warranties.',
     image: '/images/hero-roof.jpg',
@@ -11,13 +13,15 @@ const services = [
   {
     icon: Wrench,
     title: 'Commercial Roofing',
+    href: '/portfolio?cat=commercial',
     description:
       'Flat roofs, TPO, EPDM, and modified bitumen systems for businesses. Minimize downtime with efficient project management and quality craftsmanship.',
-    image: '/images/hero-roof.jpg',
+    image: '/images/work-gallery-1.jpg',
   },
   {
     icon: Layers,
     title: 'Siding Installation',
+    href: '/portfolio?cat=siding',
     description:
       "Transform your home's exterior with new vinyl, fiber cement, or engineered wood siding. Boost curb appeal and protect against the elements.",
     image: '/images/siding-work.jpg',
@@ -25,6 +29,7 @@ const services = [
   {
     icon: Droplets,
     title: 'Gutters & Downspouts',
+    href: '/portfolio?cat=gutters',
     description:
       'Seamless gutter installation, repair, and gutter guard systems. Proper drainage protects your foundation, landscaping, and siding.',
     image: '/images/gutter-install.jpg',
@@ -32,15 +37,17 @@ const services = [
   {
     icon: CloudLightning,
     title: 'Storm Restoration',
+    href: '/portfolio?cat=storm',
     description:
       'Hail, wind, and storm damage? We respond fast with thorough inspections and document everything for your insurance claim.',
     image: '/images/storm-damage.jpg',
   },
   {
     icon: FileCheck,
-    title: 'Insurance Assistance',
+    title: 'Insurance Claims Assistance',
+    href: '/portfolio?cat=storm',
     description:
-      "Navigating an insurance claim shouldn't be stressful. We work directly with your adjuster to ensure you get what you deserve — no shortcuts.",
+      'We guide you through the entire insurance process — from inspection to final payment. Insurance companies are notorious for trying to get out of paying what you\'re owed. We make sure that doesn\'t happen.',
     image: '/images/storm-damage.jpg',
   },
 ]
@@ -66,9 +73,10 @@ export default function Services() {
           {services.map((service, index) => {
             const Icon = service.icon
             return (
-              <div
+              <Link
                 key={index}
-                className="group bg-white rounded-2xl shadow-lg shadow-steel-200/50 hover:shadow-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2"
+                href={service.href}
+                className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 block"
               >
                 <div className="h-48 overflow-hidden relative">
                   <img
@@ -89,8 +97,11 @@ export default function Services() {
                   <p className="text-steel-500 leading-relaxed text-sm">
                     {service.description}
                   </p>
+                  <span className="inline-flex items-center gap-1 text-red-600 text-sm font-semibold mt-3 group-hover:gap-2 transition-all">
+                    View projects →
+                  </span>
                 </div>
-              </div>
+              </Link>
             )
           })}
         </div>

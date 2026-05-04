@@ -15,10 +15,12 @@ export default function Navbar() {
 
   const links = [
     { label: 'Home', href: '/' },
-    { label: 'Services', href: '/services' },
-    { label: 'About', href: '/about' },
-    { label: 'Software', href: '/software' },
-    { label: 'Contact', href: '/contact' },
+    { label: 'Services', href: '/#services' },
+    { label: 'Portfolio', href: '/portfolio' },
+    { label: 'About', href: '/#about' },
+    { label: 'Why Us', href: '/#why-us' },
+    { label: 'Software', href: '/#software' },
+    { label: 'Contact', href: '/#contact' },
   ]
 
   return (
@@ -33,7 +35,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group">
             <img
-              src="/images/brand-icon.png"
+              src="/images/logo.png"
               alt="614 Restore LLC"
               className="h-14 w-14 object-contain drop-shadow-lg group-hover:scale-105 transition-transform"
             />
