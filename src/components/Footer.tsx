@@ -1,4 +1,5 @@
 import { Phone, Mail, MapPin } from 'lucide-react'
+import Link from 'next/link'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -7,6 +8,7 @@ export default function Footer() {
     <footer className="bg-steel-950 text-steel-400">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+          {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
               <img
@@ -24,34 +26,37 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-steel-500 text-sm leading-relaxed mb-6">
-              Columbus, Ohio&apos;s trusted roofing and restoration company.
+              Columbus, Ohio's trusted roofing and restoration company.
               Protecting homes and helping neighbors — one roof at a time.
             </p>
           </div>
 
+          {/* Services */}
           <div>
             <h4 className="font-heading font-bold text-white text-lg mb-4">Services</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="/#services" className="hover:text-red-400 transition">Residential Roofing</a></li>
-              <li><a href="/#services" className="hover:text-red-400 transition">Commercial Roofing</a></li>
-              <li><a href="/#services" className="hover:text-red-400 transition">Siding Installation</a></li>
-              <li><a href="/#services" className="hover:text-red-400 transition">Gutters &amp; Downspouts</a></li>
-              <li><a href="/#services" className="hover:text-red-400 transition">Storm Restoration</a></li>
-              <li><a href="/#services" className="hover:text-red-400 transition">Insurance Assistance</a></li>
+              <li><Link href="/services" className="hover:text-red-400 transition">Residential Roofing</Link></li>
+              <li><Link href="/services" className="hover:text-red-400 transition">Commercial Roofing</Link></li>
+              <li><Link href="/services" className="hover:text-red-400 transition">Siding Installation</Link></li>
+              <li><Link href="/services" className="hover:text-red-400 transition">Gutters & Downspouts</Link></li>
+              <li><Link href="/services" className="hover:text-red-400 transition">Storm Restoration</Link></li>
+              <li><Link href="/services" className="hover:text-red-400 transition">Insurance Assistance</Link></li>
             </ul>
           </div>
 
+          {/* Quick Links */}
           <div>
             <h4 className="font-heading font-bold text-white text-lg mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="/" className="hover:text-red-400 transition">Home</a></li>
-              <li><a href="/#about" className="hover:text-red-400 transition">About Us</a></li>
-              <li><a href="/#why-us" className="hover:text-red-400 transition">Why Choose Us</a></li>
-              <li><a href="/#software" className="hover:text-red-400 transition">Our Software</a></li>
-              <li><a href="/#contact" className="hover:text-red-400 transition">Contact</a></li>
+              <li><Link href="/" className="hover:text-red-400 transition">Home</Link></li>
+              <li><Link href="/about" className="hover:text-red-400 transition">About Us</Link></li>
+              <li><Link href="/services" className="hover:text-red-400 transition">Services</Link></li>
+              <li><Link href="/software" className="hover:text-red-400 transition">Our Software</Link></li>
+              <li><Link href="/contact" className="hover:text-red-400 transition">Contact</Link></li>
             </ul>
           </div>
 
+          {/* Contact */}
           <div>
             <h4 className="font-heading font-bold text-white text-lg mb-4">Contact</h4>
             <ul className="space-y-4 text-sm">
@@ -70,7 +75,7 @@ export default function Footer() {
               <li>
                 <div className="flex items-center gap-3">
                   <MapPin className="w-4 h-4 text-red-500 flex-shrink-0" />
-                  Columbus, OH &amp; Central Ohio
+                  Columbus, OH & Central Ohio
                 </div>
               </li>
             </ul>
@@ -81,7 +86,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-steel-500 text-sm">
-            &copy; {currentYear} 614 Restore LLC. All rights reserved.
+            © {currentYear} 614 Restore LLC. All rights reserved.
           </p>
           <p className="text-steel-600 text-xs">
             Proudly serving Columbus, Ohio and surrounding communities
