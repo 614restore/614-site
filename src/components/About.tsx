@@ -65,9 +65,9 @@ export default function About() {
 
           {/* Right: Portrait overlay */}
           <div className="flex-shrink-0 relative">
-            <div className="relative w-[350px] h-[450px] rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
+            <div className="relative w-[320px] h-[500px] rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
               <img
-                src="/images/portrait.jpg"
+                src="/images/portrait-final.jpg"
                 alt="Jeff - Owner of 614 Restore LLC"
                 className="w-full h-full object-cover object-top"
               />
