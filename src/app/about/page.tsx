@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar'
 import About from '@/components/About'
+import Gallery from '@/components/Gallery'
 import Testimonials from '@/components/Testimonials'
 import CTABanner from '@/components/CTABanner'
 import Footer from '@/components/Footer'
@@ -14,6 +15,7 @@ export default function AboutPage() {
     <main className="min-h-screen bg-white">
       <Navbar />
       <About />
+      <Gallery />
       <Testimonials />
       <CTABanner />
       <Footer />

@@ -4,23 +4,23 @@ export default function About() {
   return (
     <section id="about" className="relative py-24 overflow-hidden">
       {/* Background Image */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 z-0">
         <img
           src="/images/about-hero-bg.jpg"
           alt=""
-          className="w-full h-full object-cover opacity-20"
+          className="w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-steel-900/70 via-steel-900/50 to-white" />
+        <div className="absolute inset-0 bg-white/90 backdrop-blur-sm" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
                 src="/images/portrait.jpg"
                 alt="Jeff - Owner of 614 Restore LLC"
-                className="w-full h-[500px] object-cover"
+                className="w-full h-[500px] object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-steel-900/40 to-transparent" />
             </div>
@@ -33,13 +33,13 @@ export default function About() {
           </div>
 
           <div>
-            <span className="inline-block text-red-400 font-semibold text-sm uppercase tracking-[0.15em] mb-3">
+            <span className="inline-block text-red-600 font-semibold text-sm uppercase tracking-[0.15em] mb-3">
               Our Story
             </span>
-            <h2 className="text-4xl sm:text-5xl font-heading font-bold text-white mb-6">
-              Meet <span className="text-red-400">Jeff</span>
+            <h2 className="text-4xl sm:text-5xl font-heading font-bold text-steel-900 mb-6">
+              Meet <span className="text-red-600">Jeff</span>
             </h2>
-            <div className="space-y-4 text-steel-300 leading-relaxed">
+            <div className="space-y-4 text-steel-600 leading-relaxed">
               <p>
                 After years in the fitness industry — a career built on helping people become
                 their best selves — COVID changed everything. When the industry took a nosedive,
@@ -51,7 +51,7 @@ export default function About() {
                 And what he saw troubled him. Too many companies were in it for themselves, padding
                 their wallets instead of looking out for their friends, family, and neighbors.
               </p>
-              <p className="font-medium text-white">
+              <p className="font-medium text-steel-800">
                 Jeff saw a gap — and an opportunity to do things differently. 614 Restore LLC
                 was born from a simple belief: homeowners deserve a contractor who genuinely has
                 their back. No upselling. No shortcuts. Just honest work for honest people.
@@ -66,12 +66,12 @@ export default function About() {
                 { Icon: TrendingUp, title: 'Innovation', sub: 'Building tools to serve you better' },
               ].map(({ Icon, title, sub }) => (
                 <div key={title} className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-red-600/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Icon className="w-5 h-5 text-red-400" />
+                  <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Icon className="w-5 h-5 text-red-600" />
                   </div>
                   <div>
-                    <p className="font-heading font-bold text-white text-lg">{title}</p>
-                    <p className="text-steel-400 text-sm">{sub}</p>
+                    <p className="font-heading font-bold text-steel-900 text-lg">{title}</p>
+                    <p className="text-steel-500 text-sm">{sub}</p>
                   </div>
                 </div>
               ))}
