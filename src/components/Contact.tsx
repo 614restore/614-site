@@ -113,7 +113,7 @@ export default function Contact() {
                         type="text"
                         required
                         className="w-full px-4 py-3 bg-white border border-steel-300 rounded-xl focus:border-red-500 focus:ring-2 focus:ring-red-500/20 outline-none transition text-steel-900"
-                        placeholder="Jeffrey"
+                        placeholder="Jeff"
                       />
                     </div>
                     <div>
@@ -124,7 +124,7 @@ export default function Contact() {
                         type="text"
                         required
                         className="w-full px-4 py-3 bg-white border border-steel-300 rounded-xl focus:border-red-500 focus:ring-2 focus:ring-red-500/20 outline-none transition text-steel-900"
-                        placeholder="Newell"
+                        placeholder="Smith"
                       />
                     </div>
                   </div>

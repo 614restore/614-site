@@ -9,7 +9,7 @@ export default function About() {
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
                 src="/images/portrait-jeff.jpg"
-                alt="Jeffrey Newell - Owner of 614 Restore LLC"
+                alt="Jeff - Owner of 614 Restore LLC"
                 className="w-full h-[500px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-steel-900/40 to-transparent" />
@@ -27,13 +27,13 @@ export default function About() {
               Our Story
             </span>
             <h2 className="text-4xl sm:text-5xl font-heading font-bold text-steel-900 mb-6">
-              Meet <span className="text-red-600">Jeffrey Newell</span>
+              Meet <span className="text-red-600">Jeff</span>
             </h2>
             <div className="space-y-4 text-steel-600 leading-relaxed">
               <p>
                 After years in the fitness industry — a career built on helping people become
                 their best selves — COVID changed everything. When the industry took a nosedive,
-                Jeffrey pivoted back to contractor work: masonry, building projects, whatever
+                Jeff pivoted back to contractor work: masonry, building projects, whatever
                 kept him working and serving others during uncertain times.
               </p>
               <p>
@@ -42,7 +42,7 @@ export default function About() {
                 their wallets instead of looking out for their friends, family, and neighbors.
               </p>
               <p className="font-medium text-steel-800">
-                Jeffrey saw a gap — and an opportunity to do things differently. 614 Restore LLC
+                Jeff saw a gap — and an opportunity to do things differently. 614 Restore LLC
                 was born from a simple belief: homeowners deserve a contractor who genuinely has
                 their back. No upselling. No shortcuts. Just honest work for honest people.
               </p>

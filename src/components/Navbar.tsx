@@ -33,7 +33,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group">
             <img
-              src="/images/logo.png"
+              src="/images/brand-icon.png"
               alt="614 Restore LLC"
               className="h-14 w-14 object-contain drop-shadow-lg group-hover:scale-105 transition-transform"
             />

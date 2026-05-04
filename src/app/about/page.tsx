@@ -6,7 +6,7 @@ import Footer from '@/components/Footer'
 
 export const metadata = {
   title: 'About Us | 614 Restore LLC',
-  description: 'Meet Jeffrey Newell, owner of 614 Restore LLC — Columbus, Ohio trusted roofing and restoration contractor.',
+  description: 'Meet Jeff, owner of 614 Restore LLC — Columbus, Ohio trusted roofing and restoration contractor.',
 }
 
 export default function AboutPage() {
