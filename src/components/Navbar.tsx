@@ -36,15 +36,12 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-3 group">
             <img
               src="/images/logo.png"
-              alt="614 Restore LLC"
+              alt="614 Restore"
               className="h-14 w-14 object-contain drop-shadow-lg group-hover:scale-105 transition-transform"
             />
             <div className="hidden sm:block">
               <span className="text-xl font-heading font-bold text-white tracking-wide">
                 614 <span className="text-red-500">Restore</span>
-              </span>
-              <span className="block text-[10px] text-steel-400 uppercase tracking-[0.2em]">
-                LLC
               </span>
             </div>
           </Link>

@@ -21,7 +21,7 @@ export default function About() {
             <div className="relative w-[320px] h-[500px] rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
               <img
                 src="/images/portrait-final.jpg"
-                alt="Jeff - Owner of 614 Restore LLC"
+                alt="Jeff - Owner of 614 Restore"
                 className="w-full h-full object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
@@ -55,7 +55,7 @@ export default function About() {
                 wallets instead of looking out for their friends, family, and neighbors.
               </p>
               <p className="font-medium text-white">
-                Jeff saw a gap — and an opportunity to do things differently. 614 Restore LLC was
+                Jeff saw a gap — and an opportunity to do things differently. 614 Restore was
                 born from a simple belief: homeowners deserve a contractor who genuinely has their
                 back. No upselling. No shortcuts. Just honest work for honest people.
               </p>

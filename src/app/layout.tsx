@@ -10,17 +10,17 @@ const oswald = Oswald({
 })
 
 export const metadata: Metadata = {
-  title: '614 Restore LLC | Columbus, Ohio Roofing & Restoration',
+  title: '614 Restore | Columbus, Ohio Roofing & Restoration',
   description:
     'Columbus, Ohio\'s trusted roofing, siding, gutters, and storm restoration company. Fully licensed & insured. Call (614) 808-8899 for a free estimate.',
   keywords:
     'roofing Columbus Ohio, storm damage restoration, siding installation, gutters, insurance claims, 614 Restore',
   openGraph: {
-    title: '614 Restore LLC | Columbus, Ohio Roofing & Restoration',
+    title: '614 Restore | Columbus, Ohio Roofing & Restoration',
     description:
       'Residential & commercial roofing, siding, gutters, and full storm restoration in Columbus, OH. Free estimates. Call (614) 808-8899.',
     url: 'https://614restore.com',
-    siteName: '614 Restore LLC',
+    siteName: '614 Restore',
     locale: 'en_US',
     type: 'website',
   },

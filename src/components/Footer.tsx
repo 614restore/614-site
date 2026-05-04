@@ -13,15 +13,12 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <img
                 src="/images/logo.png"
-                alt="614 Restore LLC"
+                alt="614 Restore"
                 className="h-12 w-12 object-contain"
               />
               <div>
                 <span className="text-xl font-heading font-bold text-white">
                   614 <span className="text-red-500">Restore</span>
-                </span>
-                <span className="block text-[10px] text-steel-500 uppercase tracking-[0.2em]">
-                  LLC
                 </span>
               </div>
             </div>
@@ -86,7 +83,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-steel-500 text-sm">
-            © {currentYear} 614 Restore LLC. All rights reserved.
+            © {currentYear} 614 Restore. All rights reserved.
           </p>
           <p className="text-steel-600 text-xs">
             Proudly serving Columbus, Ohio and surrounding communities

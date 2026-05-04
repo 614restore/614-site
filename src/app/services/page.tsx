@@ -6,7 +6,7 @@ import CTABanner from '@/components/CTABanner'
 import Footer from '@/components/Footer'
 
 export const metadata = {
-  title: 'Services | 614 Restore LLC',
+  title: 'Services | 614 Restore',
   description: 'Residential roofing, commercial roofing, siding, gutters, storm damage restoration, and insurance claims assistance in Columbus, Ohio.',
 }
 

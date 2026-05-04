@@ -3,7 +3,7 @@ import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 
 export const metadata = {
-  title: 'Contact | 614 Restore LLC',
+  title: 'Contact | 614 Restore',
   description: 'Get a free roof inspection. Call (614) 808-8899 or request an estimate online. Columbus, Ohio — fast, honest, reliable.',
 }
 
