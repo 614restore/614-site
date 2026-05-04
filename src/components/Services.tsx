@@ -47,7 +47,7 @@ const services = [
     title: 'Insurance Claims Assistance',
     href: '/portfolio?cat=storm',
     description:
-      'We guide you through the entire insurance process — from inspection to final payment. Insurance companies are notorious for trying to get out of paying what you\'re owed. We make sure that doesn\'t happen.',
+      "We guide you through the entire insurance process — from inspection to final payment. Insurance companies are notorious for trying to get out of paying what you're owed. We make sure that doesn't happen.",
     image: '/images/storm-damage.jpg',
   },
 ]
@@ -107,12 +107,12 @@ export default function Services() {
         </div>
 
         <div className="text-center mt-12">
-          <a
-            href="/#contact"
+          <Link
+            href="/contact"
             className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg hover:scale-105"
           >
             Get a Free Estimate
-          </a>
+          </Link>
         </div>
       </div>
     </section>

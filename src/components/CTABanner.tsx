@@ -1,4 +1,5 @@
 import { Phone, ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 
 export default function CTABanner() {
   return (
@@ -29,13 +30,13 @@ export default function CTABanner() {
             <Phone className="w-5 h-5" />
             (614) 808-8899
           </a>
-          <a
-            href="/#contact"
+          <Link
+            href="/contact"
             className="inline-flex items-center justify-center gap-2 border-2 border-white/40 hover:border-white text-white px-8 py-4 rounded-xl font-bold text-lg transition-all hover:bg-white/10"
           >
             Request Estimate
             <ArrowRight className="w-5 h-5" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>
