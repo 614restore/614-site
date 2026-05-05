@@ -8,7 +8,7 @@ const services = [
     href: '/portfolio?cat=residential',
     description:
       'Complete roof replacements, repairs, and maintenance for homes across Columbus. We use premium materials and back every job with solid warranties.',
-    image: '/images/hero-roof.jpg',
+    image: '/images/work-gallery-1.jpg',
   },
   {
     icon: Wrench,
@@ -16,7 +16,7 @@ const services = [
     href: '/portfolio?cat=commercial',
     description:
       'Flat roofs, TPO, EPDM, and modified bitumen systems for businesses. Minimize downtime with efficient project management and quality craftsmanship.',
-    image: '/images/work-gallery-1.jpg',
+    image: '/images/work-1.jpg',
   },
   {
     icon: Layers,
@@ -40,7 +40,7 @@ const services = [
     href: '/portfolio?cat=storm',
     description:
       'Hail, wind, and storm damage? We respond fast with thorough inspections and document everything for your insurance claim.',
-    image: '/images/storm-damage.jpg',
+    image: '/images/work-2.jpg',
   },
   {
     icon: FileCheck,
@@ -48,7 +48,7 @@ const services = [
     href: '/portfolio?cat=storm',
     description:
       "We guide you through the entire insurance process — from inspection to final payment. Insurance companies are notorious for trying to get out of paying what you're owed. We make sure that doesn't happen.",
-    image: '/images/storm-damage.jpg',
+    image: '/images/drone-aerial-1.jpg',
   },
 ]
 

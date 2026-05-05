@@ -10,16 +10,17 @@ const categories = [
   { id: 'siding', label: 'Siding' },
   { id: 'gutters', label: 'Gutters' },
   { id: 'storm', label: 'Storm Damage' },
+  { id: 'aerial', label: 'Aerial / Drone' },
 ]
 
 const projects = [
   { id: 1, category: 'residential', title: 'Full Roof Replacement', location: 'Westerville, OH', image: '/images/work-gallery-1.jpg' },
-  { id: 2, category: 'residential', title: 'Storm Damage Repair', location: 'Dublin, OH', image: '/images/storm-damage.jpg' },
-  { id: 3, category: 'residential', title: 'Roof Inspection', location: 'Columbus, OH', image: '/images/hero-roof.jpg' },
-  { id: 4, category: 'commercial', title: 'TPO Flat Roof Installation', location: 'Reynoldsburg, OH', image: '/images/work-gallery-1.jpg' },
-  { id: 5, category: 'siding', title: 'Fiber Cement Siding', location: 'Grove City, OH', image: '/images/siding-work.jpg' },
-  { id: 6, category: 'storm', title: 'Hail Damage Restoration', location: 'Pickerington, OH', image: '/images/storm-damage.jpg' },
-  { id: 7, category: 'residential', title: 'Asphalt Shingle Roof', location: 'Upper Arlington, OH', image: '/images/hero-roof.jpg' },
+  { id: 2, category: 'residential', title: 'Asphalt Shingle Roof', location: 'Dublin, OH', image: '/images/work-1.jpg' },
+  { id: 3, category: 'residential', title: 'Storm Damage Repair', location: 'Columbus, OH', image: '/images/storm-damage.jpg' },
+  { id: 4, category: 'aerial', title: 'Aerial Roof Inspection', location: 'Central Ohio', image: '/images/drone-aerial-1.jpg' },
+  { id: 5, category: 'aerial', title: 'Drone Survey', location: 'Central Ohio', image: '/images/drone-aerial-2.jpg' },
+  { id: 6, category: 'siding', title: 'Fiber Cement Siding', location: 'Grove City, OH', image: '/images/siding-work.jpg' },
+  { id: 7, category: 'storm', title: 'Hail Damage Restoration', location: 'Pickerington, OH', image: '/images/work-2.jpg' },
   { id: 8, category: 'gutters', title: 'Seamless Gutter Install', location: 'Worthington, OH', image: '/images/gutter-install.jpg' },
 ]
 
