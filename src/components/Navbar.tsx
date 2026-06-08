@@ -15,12 +15,12 @@ export default function Navbar() {
 
   const links = [
     { label: 'Home', href: '/' },
-    { label: 'Services', href: '/#services' },
+    { label: 'Services', href: '/services' },
     { label: 'Portfolio', href: '/portfolio' },
-    { label: 'About', href: '/#about' },
-    { label: 'Why Us', href: '/#why-us' },
-    { label: 'Software', href: '/#software' },
-    { label: 'Contact', href: '/#contact' },
+    { label: 'About', href: '/about' },
+    { label: 'Why Us', href: '/services#why-us' },
+    { label: 'Software', href: '/software' },
+    { label: 'Contact', href: '/contact' },
   ]
 
   return (

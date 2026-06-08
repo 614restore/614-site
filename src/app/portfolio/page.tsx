@@ -15,7 +15,7 @@ const categories = [
 
 const projects = [
   { id: 1, category: 'residential', title: 'Full Roof Replacement', location: 'Westerville, OH', image: '/images/work-gallery-1.jpg' },
-  { id: 2, category: 'residential', title: 'Asphalt Shingle Roof', location: 'Dublin, OH', image: '/images/work-1.jpg' },
+  { id: 2, category: 'residential', title: 'Asphalt Shingle Roof', location: 'Dublin, OH', image: '/images/IMG_5535.JPG' },
   { id: 3, category: 'residential', title: 'Storm Damage Repair', location: 'Columbus, OH', image: '/images/storm-damage.jpg' },
   { id: 4, category: 'aerial', title: 'Aerial Roof Inspection', location: 'Central Ohio', image: '/images/drone-aerial-1.jpg' },
   { id: 5, category: 'aerial', title: 'Drone Survey', location: 'Central Ohio', image: '/images/drone-aerial-2.jpg' },
