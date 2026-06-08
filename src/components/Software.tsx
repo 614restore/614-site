@@ -11,7 +11,8 @@ const tools = [
     status: 'Live',
     statusColor: 'bg-green-500',
     features: ['Professional estimates', 'Fast turnaround', 'Accurate pricing'],
-    link: '/software#quotemgr',
+    link: 'https://quotemgr.614restore.com',
+    external: true,
   },
   {
     name: 'TrussCTR',
@@ -23,6 +24,7 @@ const tools = [
     statusColor: 'bg-amber-500',
     features: ['Lead management', 'Job tracking', 'Customer insights'],
     link: '/software#trussctr',
+    external: false,
   },
   {
     name: 'ScopeMGR',
@@ -34,6 +36,7 @@ const tools = [
     statusColor: 'bg-blue-500',
     features: ['Photo documentation', 'Digital signatures', 'Canvassing tools'],
     link: '/software#scopemgr',
+    external: false,
   },
 ]
 
@@ -57,10 +60,12 @@ export default function Software() {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {tools.map((tool, index) => (
-            <Link
+          {tools.map((tool, index) => tool.external ? (
+            <a
               key={index}
               href={tool.link}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-steel-100 hover:border-red-200 block"
             >
               <div className="flex items-center justify-between mb-6">
@@ -98,6 +103,40 @@ export default function Software() {
                 ))}
               </ul>
 
+              <span className="inline-flex items-center gap-1 text-red-600 text-sm font-semibold mt-4 group-hover:gap-2 transition-all">
+                {tool.external ? 'Open app →' : 'Learn more →'}
+              </span>
+            </a>
+          ) : (
+            <Link
+              key={index}
+              href={tool.link}
+              className="group bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-steel-100 hover:border-red-200 block"
+            >
+              <div className="flex items-center justify-between mb-6">
+                {tool.logo ? (
+                  <img src={tool.logo} alt={`${tool.name} logo`} className="h-14 w-auto object-contain" />
+                ) : (
+                  <div className="w-14 h-14 bg-steel-900 rounded-xl flex items-center justify-center group-hover:bg-red-600 transition-colors duration-300">
+                    <Camera className="w-7 h-7 text-white" />
+                  </div>
+                )}
+                <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-steel-500">
+                  <span className={`w-2 h-2 rounded-full ${tool.statusColor}`} />
+                  {tool.status}
+                </span>
+              </div>
+              <h3 className="text-2xl font-heading font-bold text-steel-900 mb-1 group-hover:text-red-600 transition-colors">{tool.name}</h3>
+              <p className="text-red-600 font-medium text-sm mb-4">{tool.tagline}</p>
+              <p className="text-steel-500 leading-relaxed text-sm mb-6">{tool.description}</p>
+              <ul className="space-y-2">
+                {tool.features.map((feature, i) => (
+                  <li key={i} className="flex items-center gap-2 text-steel-600 text-sm">
+                    <ArrowRight className="w-3 h-3 text-red-500 flex-shrink-0" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
               <span className="inline-flex items-center gap-1 text-red-600 text-sm font-semibold mt-4 group-hover:gap-2 transition-all">
                 Learn more →
               </span>
