@@ -39,7 +39,7 @@ const tools = [
     features: ['Automatic drive tracking', 'Tax-ready reports', 'Pay once, no subscription'],
     link: 'https://614restore.github.io/milesmgr-site/#notify',
     external: true,
-    cta: 'Get notified at launch →',
+    cta: 'Learn more →',
   },
 ]
 
