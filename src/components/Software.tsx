@@ -13,6 +13,7 @@ const tools = [
     features: ['Professional estimates', 'Fast turnaround', 'Accurate pricing'],
     link: 'https://quotemgr.614restore.com',
     external: true,
+    cta: 'Open app →',
   },
   {
     name: 'TrussCTR',
@@ -25,6 +26,7 @@ const tools = [
     features: ['Lead management', 'Job tracking', 'Customer insights'],
     link: '/software#trussctr',
     external: false,
+    cta: 'Learn more →',
   },
   {
     name: 'ScopeMGR',
@@ -37,6 +39,20 @@ const tools = [
     features: ['Photo documentation', 'Digital signatures', 'Canvassing tools'],
     link: '/software#scopemgr',
     external: false,
+    cta: 'Learn more →',
+  },
+  {
+    name: 'MilesMGR',
+    logo: '/images/milesmgr-icon.png',
+    tagline: 'Mileage Tracker for iPhone',
+    description:
+      'Records your drives automatically and turns them into a mileage log for tax time. No account to create, and your trips stay on your iPhone. Launching soon on the App Store.',
+    status: 'Coming Soon',
+    statusColor: 'bg-amber-500',
+    features: ['Automatic drive tracking', 'Tax-ready reports', 'Pay once, no subscription'],
+    link: 'https://614restore.github.io/milesmgr-site/#notify',
+    external: true,
+    cta: 'Get notified at launch →',
   },
 ]
 
@@ -59,7 +75,7 @@ export default function Software() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {tools.map((tool, index) => tool.external ? (
             <a
               key={index}
@@ -104,7 +120,7 @@ export default function Software() {
               </ul>
 
               <span className="inline-flex items-center gap-1 text-red-600 text-sm font-semibold mt-4 group-hover:gap-2 transition-all">
-                {tool.external ? 'Open app →' : 'Learn more →'}
+                {tool.cta}
               </span>
             </a>
           ) : (
@@ -138,7 +154,7 @@ export default function Software() {
                 ))}
               </ul>
               <span className="inline-flex items-center gap-1 text-red-600 text-sm font-semibold mt-4 group-hover:gap-2 transition-all">
-                Learn more →
+                {tool.cta}
               </span>
             </Link>
           ))}
