@@ -29,19 +29,6 @@ const tools = [
     cta: 'Learn more →',
   },
   {
-    name: 'ScopeMGR',
-    logo: null,
-    tagline: 'Photo Documentation & Canvassing',
-    description:
-      'The ultimate tool for documenting inspections, managing contingencies, and getting paperwork signed. Every detail captured, organized, and accessible.',
-    status: 'In Development',
-    statusColor: 'bg-blue-500',
-    features: ['Photo documentation', 'Digital signatures', 'Canvassing tools'],
-    link: '/software#scopemgr',
-    external: false,
-    cta: 'Learn more →',
-  },
-  {
     name: 'MilesMGR',
     logo: '/images/milesmgr-icon.png',
     tagline: 'Mileage Tracker for iPhone',
@@ -75,7 +62,7 @@ export default function Software() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-3 gap-8">
           {tools.map((tool, index) => tool.external ? (
             <a
               key={index}

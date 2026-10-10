@@ -5,7 +5,7 @@ import Footer from '@/components/Footer'
 
 export const metadata = {
   title: 'Our Software | 614 Restore',
-  description: 'QuoteMGR, TrussCTR, ScopeMGR, and MilesMGR — software built in-house by 614 Restore to serve homeowners and contractors better.',
+  description: 'QuoteMGR, TrussCTR, and MilesMGR — software built in-house by 614 Restore to serve homeowners and contractors better.',
 }
 
 export default function SoftwarePage() {
