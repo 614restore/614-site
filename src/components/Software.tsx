@@ -41,6 +41,19 @@ const tools = [
     external: true,
     cta: 'Learn more →',
   },
+  {
+    name: 'Off the Page',
+    logo: '/images/offthepage-icon.png',
+    tagline: 'Read Aloud & Study for iPhone and iPad',
+    description:
+      'Hear any text read aloud, save it into subject folders, and turn notes, lectures, and books into study guides, flashcards, and practice tests. Private by design, with no account. Launching soon on the App Store.',
+    status: 'Coming Soon',
+    statusColor: 'bg-amber-500',
+    features: ['Read anything aloud', 'Study guides, flashcards & tests', 'Study together over FaceTime'],
+    link: '/software/offthepage',
+    external: false,
+    cta: 'Learn more →',
+  },
 ]
 
 export default function Software() {
@@ -62,7 +75,7 @@ export default function Software() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {tools.map((tool, index) => tool.external ? (
             <a
               key={index}
