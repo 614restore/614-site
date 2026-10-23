@@ -16,6 +16,19 @@ const tools = [
     cta: 'Open app →',
   },
   {
+    name: 'PiMetric',
+    logo: '/images/pimetric-icon.png',
+    tagline: 'Calculators for iPhone and Apple Watch',
+    description:
+      'Over 100 calculators in one app: feet, inches and fractions for the job site, plus money, health, cooking and more. Say an equation out loud and see the work, step by step. No account, no ads, no tracking.',
+    status: 'Live',
+    statusColor: 'bg-green-500',
+    features: ['Feet, inches & fractions, or metric', 'Say it out loud', 'English & Español'],
+    link: 'https://apps.apple.com/app/pimetric/id6817118888',
+    external: true,
+    cta: 'Get it on the App Store →',
+  },
+  {
     name: 'TrussCTR',
     logo: '/images/trussctr-logo.png',
     tagline: 'Full-Featured CRM',
