@@ -46,13 +46,21 @@ const tools = [
     logo: '/images/milesmgr-icon.png',
     tagline: 'Mileage Tracker for iPhone',
     description:
-      'Records your drives automatically and turns them into a mileage log for tax time. No account to create, and your trips stay on your iPhone. Launching soon on the App Store.',
-    status: 'Coming Soon',
-    statusColor: 'bg-amber-500',
-    features: ['Automatic drive tracking', 'Tax-ready reports', 'Pay once, no subscription'],
-    link: 'https://614restore.github.io/milesmgr-site/#notify',
+      'Records your drives automatically and turns them into a clean, tax-ready mileage log. Swipe each trip to Business or Personal, snap your receipts, and export a report when it is time to file. No account to create, and your trips stay on your iPhone.',
+    status: 'Live',
+    statusColor: 'bg-green-500',
+    features: [
+      'Free download with a 5-day free trial, no payment required',
+      'Drives are logged automatically',
+      'Swipe to sort Business or Personal',
+      'Scan receipts and keep them with the trip',
+      'Tax-ready mileage reports',
+      'One-time purchase, no subscription',
+    ],
+    offer: 'Free to try for 5 days · Lifetime access $19.99 one-time',
+    link: 'https://apps.apple.com/app/id6819932792',
     external: true,
-    cta: 'Learn more →',
+    cta: 'Download on the App Store →',
   },
   {
     name: 'Off the Page',
@@ -131,6 +139,12 @@ export default function Software() {
                   </li>
                 ))}
               </ul>
+
+              {tool.offer && (
+                <p className="mt-5 rounded-lg bg-red-50 border border-red-100 px-3 py-2 text-sm font-semibold text-red-700">
+                  {tool.offer}
+                </p>
+              )}
 
               <span className="inline-flex items-center gap-1 text-red-600 text-sm font-semibold mt-4 group-hover:gap-2 transition-all">
                 {tool.cta}
