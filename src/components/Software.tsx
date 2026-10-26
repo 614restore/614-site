@@ -24,7 +24,7 @@ const tools = [
     status: 'Live',
     statusColor: 'bg-green-500',
     features: ['Feet, inches & fractions, or metric', 'Say it out loud', 'English & Español'],
-    link: 'https://apps.apple.com/app/pimetric/id6817118888',
+    link: 'https://apps.apple.com/us/app/pimetric/id6817118888?pt=82404571&ct=614restore-site',
     external: true,
     cta: 'Get it on the App Store →',
   },
@@ -58,7 +58,7 @@ const tools = [
       'One-time purchase, no subscription',
     ],
     offer: 'Free to try for 5 days · Lifetime access $19.99 one-time',
-    link: 'https://apps.apple.com/app/id6819932792',
+    link: 'https://apps.apple.com/us/app/milesmgr-mileage-drive-log/id6819932792?pt=82404571&ct=614restore-site',
     external: true,
     cta: 'Download on the App Store →',
   },
@@ -87,12 +87,13 @@ export default function Software() {
             Innovation
           </span>
           <h2 className="text-4xl sm:text-5xl font-heading font-bold text-steel-900 mb-4">
-            Built by a Contractor, <span className="text-red-600">for Contractors</span>
+            Don&apos;t Like a Tool? <span className="text-red-600">Build a Better One.</span>
           </h2>
           <p className="text-steel-500 text-lg max-w-3xl mx-auto">
-            After using dozens of tools that always seemed to miss the mark, Jeff decided to
-            build his own. These tools make us more efficient — which means more time focused on
-            what actually matters: <strong>taking care of you.</strong>
+            Every app here started as a frustration. Jeff used software that missed the mark,
+            tried to get things changed, and when that went nowhere — he built his own.
+            That&apos;s still how every product gets made. These tools make us more efficient —
+            which means more time focused on what actually matters: <strong>taking care of you.</strong>
           </p>
         </div>
 
