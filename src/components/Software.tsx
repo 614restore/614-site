@@ -58,9 +58,9 @@ const tools = [
       'One-time purchase, no subscription',
     ],
     offer: 'Free to try for 5 days · Lifetime access $19.99 one-time',
-    link: 'https://apps.apple.com/us/app/milesmgr-mileage-drive-log/id6819932792?pt=82404571&ct=614restore-site',
-    external: true,
-    cta: 'Download on the App Store →',
+    link: '/software/milesmgr',
+    external: false,
+    cta: 'See MilesMGR →',
   },
   {
     name: 'Off the Page',
@@ -181,6 +181,11 @@ export default function Software() {
                   </li>
                 ))}
               </ul>
+              {tool.offer && (
+                <p className="mt-5 rounded-lg bg-red-50 border border-red-100 px-3 py-2 text-sm font-semibold text-red-700">
+                  {tool.offer}
+                </p>
+              )}
               <span className="inline-flex items-center gap-1 text-red-600 text-sm font-semibold mt-4 group-hover:gap-2 transition-all">
                 {tool.cta}
               </span>
