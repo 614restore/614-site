@@ -19,6 +19,8 @@ const APP_STORE_URL =
   'https://apps.apple.com/us/app/milesmgr-mileage-drive-log/id6819932792?pt=82404571&ct=614restore-milesmgr-page'
 const SUPPORT_EMAIL = 'devmgr.app@gmail.com'
 const PRIVACY_URL = 'https://614restore.github.io/milesmgr-site/privacy.html'
+const OFFER_CODE = 'EARLYMILES'
+const OFFER_REDEEM_URL = `https://apps.apple.com/redeem?ctx=offercodes&id=6819932792&code=${OFFER_CODE}`
 
 const screenshots = [
   { src: '01-every-business-mile', alt: 'Dashboard showing business miles and tax deduction' },
@@ -70,7 +72,7 @@ const featureGroups = [
 const faqs = [
   {
     q: 'How much does it cost?',
-    a: 'MilesMGR is a free download with a 5-day free trial of every feature, no payment required. After that, MilesMGR Pro is a single one-time purchase. There is no subscription and no monthly fee.',
+    a: 'MilesMGR is a free download with a 5-day free trial of every feature, no payment required. After that, MilesMGR Pro is a single one-time purchase. There is no subscription and no monthly fee. For a limited time, founders can use code EARLYMILES to get Pro for $9.99.',
   },
   {
     q: 'Do I need to create an account?',
@@ -112,6 +114,25 @@ export default function MilesMGRPage() {
           </p>
           <AppStoreButton href={APP_STORE_URL} app="MilesMGR" placement="hero" />
           <p className="text-steel-400 text-sm mt-3">Free download · 5-day free trial · One-time purchase</p>
+
+          <div className="mt-8 max-w-xl mx-auto rounded-2xl bg-red-50 border border-red-100 px-6 py-5">
+            <p className="text-red-700 font-semibold">
+              Founders offer: MilesMGR Pro for $9.99 with code{' '}
+              <span className="font-mono bg-white border border-red-200 rounded px-2 py-0.5">{OFFER_CODE}</span>
+            </p>
+            <p className="text-steel-500 text-sm mt-2">
+              Limited number of codes. Install the app, then tap the link below, or enter the code in the app under
+              Settings › Redeem a code.
+            </p>
+            <a
+              href={OFFER_REDEEM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-3 text-red-600 font-semibold hover:underline"
+            >
+              Redeem {OFFER_CODE} →
+            </a>
+          </div>
         </div>
       </section>
 
