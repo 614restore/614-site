@@ -57,7 +57,7 @@ const tools = [
       'Tax-ready mileage reports',
       'One-time purchase, no subscription',
     ],
-    offer: 'Free to try for 5 days · Lifetime access $19.99 one-time',
+    offer: 'Free to try for 5 days · Founders price $9.99 with code EARLYMILES',
     link: '/software/milesmgr',
     external: false,
     cta: 'See MilesMGR →',
