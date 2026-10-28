@@ -75,6 +75,10 @@ const faqs = [
     a: 'MilesMGR is a free download with a 5-day free trial of every feature, no payment required. After that, MilesMGR Pro is a single one-time purchase. There is no subscription and no monthly fee. For a limited time, founders can use code EARLYMILES to get Pro for $9.99.',
   },
   {
+    q: 'Why is it a one-time purchase instead of a subscription?',
+    a: "It's not because it does less. Many mileage apps charge every month because they run servers that store your trips and locations, and someone has to pay for those servers. MilesMGR has none. Your data stays on your iPhone and your own iCloud, so there is no server bill to pass on to you.",
+  },
+  {
     q: 'Do I need to create an account?',
     a: 'No. There are no accounts and no servers. Your trips, locations and receipts are stored on your iPhone and backed up to your own iCloud Drive. We never see your data, and there are no ads.',
   },
