@@ -37,9 +37,9 @@ const tools = [
     status: 'Coming Soon',
     statusColor: 'bg-amber-500',
     features: ['Lead management', 'Job tracking', 'Customer insights'],
-    link: '/software#trussctr',
-    external: false,
-    cta: 'Learn more →',
+    link: 'https://trussctr.614restore.com',
+    external: true,
+    cta: 'Open app →',
   },
   {
     name: 'MilesMGR',
