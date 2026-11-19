@@ -78,7 +78,7 @@ const tools = [
       'Study Room over FaceTime for up to 32',
       'Mock interviews and live interview hints',
     ],
-    offer: 'Free to try for 3 days · Then $2.99 once, no subscription',
+    offer: 'Free to try for 3 days · Launch price $4.99 once (regular $9.99)',
     link: '/software/offthepage',
     external: false,
     cta: 'See Off the Page →',
