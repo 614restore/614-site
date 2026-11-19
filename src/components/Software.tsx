@@ -65,15 +65,23 @@ const tools = [
   {
     name: 'Off the Page',
     logo: '/images/offthepage-icon.png',
-    tagline: 'Read Aloud & Study for iPhone and iPad',
+    tagline: 'Read Aloud, Study & Interview Prep for iPhone and iPad',
     description:
-      'Hear any text read aloud, save it into subject folders, and turn notes, lectures, and books into study guides, flashcards, and practice tests. Private by design, with no account. Launching soon on the App Store.',
-    status: 'Coming Soon',
-    statusColor: 'bg-amber-500',
-    features: ['Read anything aloud', 'Study guides, flashcards & tests', 'Study together over FaceTime'],
+      'Hear any text read aloud, record lectures, and turn your notes into study guides, flashcards and practice tests. Study with friends over FaceTime, and practise interviews with feedback on every answer. Private by design, with no account.',
+    status: 'Live',
+    statusColor: 'bg-green-500',
+    features: [
+      'Free download with a 3-day free trial',
+      'Read anything aloud, even offline',
+      'Record lectures, then Zedd Notes in one tap',
+      'Study guides, flashcards & practice tests',
+      'Study Room over FaceTime for up to 32',
+      'Mock interviews and live interview hints',
+    ],
+    offer: 'Free to try for 3 days · Then $2.99 once, no subscription',
     link: '/software/offthepage',
     external: false,
-    cta: 'Learn more →',
+    cta: 'See Off the Page →',
   },
 ]
 
