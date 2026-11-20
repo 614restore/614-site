@@ -168,8 +168,8 @@ export default function OffThePagePage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[1.2fr_1fr] gap-12 items-center">
           <div className="text-center lg:text-left">
             <img
-              src="/images/offthepage-icon.png"
-              alt="Off the Page app icon"
+              src="/images/offthepage-logo.png"
+              alt="Off the Page"
               className="w-20 h-20 rounded-[22%] mx-auto lg:mx-0 mb-6 shadow-lg"
             />
             <h1 className="text-4xl sm:text-5xl font-heading font-bold mb-4">

@@ -64,7 +64,7 @@ const tools = [
   },
   {
     name: 'Off the Page',
-    logo: '/images/offthepage-icon.png',
+    logo: '/images/offthepage-logo.png',
     tagline: 'Read Aloud, Study & Interview Prep for iPhone and iPad',
     description:
       'Hear any text read aloud, record lectures, and turn your notes into study guides, flashcards and practice tests. Study with friends over FaceTime, and practise interviews with feedback on every answer. Private by design, with no account.',
