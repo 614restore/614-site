@@ -17,6 +17,12 @@ const sections: { title: string; body: string[] }[] = [
     ],
   },
   {
+    title: 'This website',
+    body: [
+      'Everything above and below is about the app. This website (614restore.com, including the Off the Page pages) is different: it uses Google Analytics and the Meta Pixel to count visits and measure our ads. They may set cookies in your browser and receive standard information such as the pages you view, your browser type, and your IP address, under Google\'s and Meta\'s privacy policies. You can block or clear these cookies in your browser settings. None of this is in the app.',
+    ],
+  },
+  {
     title: 'Your library',
     body: [
       'Text, photos, scans, books, recordings, highlights, flashcards, and tests you save are stored in an "Off the Page" folder on your device. If you turn on Sync with iCloud, that folder is stored in your own iCloud Drive account instead, under Apple\'s privacy policy. We cannot see it either way.',
@@ -87,7 +93,7 @@ export default function OffThePagePrivacy() {
             ← Off the Page
           </Link>
           <h1 className="text-4xl font-heading font-bold text-steel-900 mt-4 mb-2">Off the Page Privacy Policy</h1>
-          <p className="text-steel-500 mb-10">Last updated October 22, 2026</p>
+          <p className="text-steel-500 mb-10">Last updated November 21, 2026</p>
 
           {sections.map((section) => (
             <section key={section.title} className="mb-8">

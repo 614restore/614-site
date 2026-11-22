@@ -49,7 +49,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '1832240871127078');
-fbq('track', 'PageView');`}
+fbq('trackSingle', '1832240871127078', 'PageView');`}
         </Script>
         <noscript>
           {/* eslint-disable-next-line @next/next/no-img-element */}
