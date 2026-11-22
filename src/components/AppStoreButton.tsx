@@ -6,6 +6,7 @@ import { Download } from 'lucide-react'
 declare global {
   interface Window {
     fbq?: (...args: unknown[]) => void
+    gtag?: (...args: unknown[]) => void
   }
 }
 
@@ -24,7 +25,8 @@ function adSource(): string | null {
   return source || null
 }
 
-// App Store link that also records a Meta Pixel event, so ad clicks that reach the App Store can be counted.
+// App Store link that also records a Meta Pixel event and a Google Analytics event (app_store_click),
+// so ad clicks that reach the App Store can be counted.
 export default function AppStoreButton({ href, app, placement, className = '' }: Props) {
   const [link, setLink] = useState(href)
   const [source, setSource] = useState<string | null>(null)
@@ -43,7 +45,11 @@ export default function AppStoreButton({ href, app, placement, className = '' }:
       href={link}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={() => window.fbq?.('trackCustom', 'AppStoreClick', { app, placement, source: source ?? 'site' })}
+      onClick={() => {
+        const details = { app, placement, source: source ?? 'site' }
+        window.fbq?.('trackCustom', 'AppStoreClick', details)
+        window.gtag?.('event', 'app_store_click', details)
+      }}
       className={`inline-flex items-center gap-3 bg-steel-900 hover:bg-black text-white font-semibold px-6 py-3 rounded-xl transition-colors ${className}`}
     >
       <Download className="w-6 h-6" />
