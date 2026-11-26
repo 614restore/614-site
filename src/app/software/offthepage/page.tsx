@@ -214,6 +214,23 @@ export default function OffThePagePage() {
         </div>
       </section>
 
+      <section className="py-10 bg-[#140b24] text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
+          <img src="/images/offthepage/zedd-head.png" alt="" className="w-16 h-auto" />
+          <div className="flex-1">
+            <p className="text-[#d6fa29] font-extrabold text-sm tracking-wide">NEW · DAILY CHALLENGE</p>
+            <h2 className="text-2xl font-heading font-bold">30 seconds. Say it out loud. Zedd scores you.</h2>
+            <p className="text-white/70 mt-1">Sell it, explain it or nail the interview question. Play free in your browser, no download.</p>
+          </div>
+          <Link
+            href="/software/offthepage/daily"
+            className="inline-flex items-center gap-2 bg-[#d6fa29] text-[#140b24] font-bold px-6 py-3 rounded-xl hover:brightness-95"
+          >
+            Play today&apos;s challenge <ArrowRight className="w-5 h-5" />
+          </Link>
+        </div>
+      </section>
+
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
           {galleries.map((gallery) => (

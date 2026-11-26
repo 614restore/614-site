@@ -9,7 +9,7 @@ export const metadata = {
 
 const SUPPORT_EMAIL = 'devmgr.app@gmail.com'
 
-const sections: { title: string; body: string[] }[] = [
+const sections: { id?: string; title: string; body: string[] }[] = [
   {
     title: 'The short version',
     body: [
@@ -20,6 +20,16 @@ const sections: { title: string; body: string[] }[] = [
     title: 'This website',
     body: [
       'Everything above and below is about the app. This website (614restore.com, including the Off the Page pages) is different: it uses Google Analytics and the Meta Pixel to count visits and measure our ads. They may set cookies in your browser and receive standard information such as the pages you view, your browser type, and your IP address, under Google\'s and Meta\'s privacy policies. You can block or clear these cookies in your browser settings. None of this is in the app.',
+    ],
+  },
+  {
+    id: 'daily-challenge',
+    title: 'The Daily Challenge on this website',
+    body: [
+      'Your voice stays on your device. Only the words you said are sent to be scored, and they aren\'t stored.',
+      'In more detail: the web Daily Challenge (614restore.com/software/offthepage/daily) uses your browser\'s own speech recognition to turn what you say into words. We never receive your audio. Depending on your browser, its speech recognition may run on your device or through your browser maker\'s speech service (for example Google for Chrome or Apple for Safari), under their privacy policies.',
+      'To score your answer, the page sends only the text of what you said (up to about 1,500 characters), the day\'s prompt and the feedback style you picked to our server, which passes it to an AI model through the Vercel AI Gateway and sends the score back. We do not store the text or the score, and the game asks for no name, account, or email. To stop abuse, the server counts scores per visitor for one day using a one-way scrambled (hashed) version of your IP address, which is thrown away after a day.',
+      'Your feedback style, streak, and today\'s scores are saved only in your browser\'s local storage, which you can clear at any time. The Daily Challenge sets no cookies of its own.',
     ],
   },
   {
@@ -93,10 +103,10 @@ export default function OffThePagePrivacy() {
             ← Off the Page
           </Link>
           <h1 className="text-4xl font-heading font-bold text-steel-900 mt-4 mb-2">Off the Page Privacy Policy</h1>
-          <p className="text-steel-500 mb-10">Last updated November 21, 2026</p>
+          <p className="text-steel-500 mb-10">Last updated November 25, 2026</p>
 
           {sections.map((section) => (
-            <section key={section.title} className="mb-8">
+            <section key={section.title} id={section.id} className="mb-8 scroll-mt-28">
               <h2 className="text-xl font-heading font-bold text-steel-900 mb-3">{section.title}</h2>
               {section.body.map((paragraph) => (
                 <p key={paragraph} className="text-steel-600 leading-relaxed mb-3">
