@@ -2,7 +2,7 @@
 // Without a valid result in the query it draws a plain invitation card.
 import { ImageResponse } from 'next/og'
 import { TRACK_TITLES } from '@/lib/offthepage/daily'
-import { formatDate, shareParams } from '../share'
+import { formatDate, shareParams } from '../_daily/share'
 
 const LIME = '#d6fa29'
 const TEAL = '#2eebcc'
@@ -32,7 +32,7 @@ export async function GET(request: Request) {
   const promptSize = promptText.length > 70 ? 40 : 46
   const verdict = shared?.verdict ? `“${shared.verdict.replace(/'/g, '’')}”` : '“Think you can talk your way past me?” — Zedd'
   const label = shared ? `${TRACK_TITLES[shared.track].toUpperCase()} · ${formatDate(shared.date)}` : 'A NEW CHALLENGE EVERY DAY'
-  const footer = 'Can you beat it? 614restore.com/software/offthepage/daily'
+  const footer = 'Can you beat it? 614restore.com/software/offthepage'
   const allText = ['OFF THE PAGE DAILY CHALLENGE', label, promptText, score, verdict, 'Learn it. Say it. Land it.', footer].join(' ')
   const weights = [400, 600, 700, 800] as const
   const loaded = await Promise.all(weights.map((w) => inter(w, allText)))

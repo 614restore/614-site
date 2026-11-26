@@ -1,5 +1,5 @@
 // The share link's query: t (track), p (prompt id), s (score 0–100), v (Zedd's verdict), d (YYYY-MM-DD).
-// Used by the page's preview tags, the card image, and the Share button. Values are checked, never trusted.
+// Used by the Off the Page page's preview tags, the card image, and the Share button. Values are checked, never trusted.
 import { isTrack, promptById, type ChallengePrompt, type Track } from '@/lib/offthepage/daily'
 
 export type Shared = { track: Track; prompt: ChallengePrompt; score: number; verdict: string; date: string; query: string }

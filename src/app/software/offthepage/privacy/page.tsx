@@ -26,10 +26,10 @@ const sections: { id?: string; title: string; body: string[] }[] = [
     id: 'daily-challenge',
     title: 'The Daily Challenge on this website',
     body: [
-      'Your voice stays on your device. Only the words you said are sent to be scored, and they aren\'t stored.',
-      'In more detail: the web Daily Challenge (614restore.com/software/offthepage/daily) uses your browser\'s own speech recognition to turn what you say into words. We never receive your audio. Depending on your browser, its speech recognition may run on your device or through your browser maker\'s speech service (for example Google for Chrome or Apple for Safari), under their privacy policies.',
-      'To score your answer, the page sends only the text of what you said (up to about 1,500 characters), the day\'s prompt and the feedback style you picked to our server, which passes it to an AI model through the Vercel AI Gateway and sends the score back. We do not store the text or the score, and the game asks for no name, account, or email. To stop abuse, the server counts scores per visitor for one day using a one-way scrambled (hashed) version of your IP address, which is thrown away after a day.',
-      'Your feedback style, streak, and today\'s scores are saved only in your browser\'s local storage, which you can clear at any time. The Daily Challenge sets no cookies of its own.',
+      'The Daily Challenge on 614restore.com/software/offthepage uses your browser\'s own speech recognition to turn what you say into words. We never receive your audio. Depending on your browser, its speech recognition may run on your device or through your browser maker\'s speech service (for example Google for Chrome or Apple for Safari), under their privacy policies.',
+      'Without an AI key, your answer is scored right in your browser with word checks, and your words are not sent anywhere.',
+      'If you add your own AI key (for example a free Groq or Google Gemini key), your browser sends the words you said, the day\'s prompt and the feedback style you picked straight to that provider to be scored, under that provider\'s terms. For example, Google may use what is sent with a free Gemini key to improve its products. We never receive your key or your words.',
+      'Your key (only if you tick Remember on this device), feedback style, streak and today\'s scores are saved only in your browser\'s local storage, which you can clear at any time. The Daily Challenge asks for no name, account or email and sets no cookies of its own.',
     ],
   },
   {

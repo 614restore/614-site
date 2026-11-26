@@ -1,10 +1,13 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, Check, FileDown, Mail, ShieldCheck } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import AppStoreButton from '@/components/AppStoreButton'
+import DailyChallenge from './_daily/DailyChallenge'
+import { shareParams } from './_daily/share'
 
-export const metadata = {
+const metadata: Metadata = {
   title: 'Off the Page: Read Aloud, Study & Interview Prep | 614 Restore',
   description:
     'Off the Page for iPhone and iPad reads anything aloud, records lectures, turns notes into study guides, flashcards and practice tests, runs study rooms over FaceTime, and coaches you for interviews. Free 3-day trial, then a one-time $9.99 unlock, $4.99 at launch.',
@@ -15,6 +18,24 @@ export const metadata = {
     url: 'https://614restore.com/software/offthepage',
     images: ['/images/offthepage/listen-01.jpg'],
   },
+}
+
+type Props = { searchParams: Record<string, string | string[] | undefined> }
+
+// A shared Daily Challenge result (?t=…&s=…) previews as that player's score card.
+export function generateMetadata({ searchParams }: Props): Metadata {
+  const shared = shareParams(searchParams)
+  if (!shared) return metadata
+  const title = `I scored ${shared.score} on today's Off the Page Daily Challenge. Can you beat it?`
+  const description = 'A new 30-second speaking challenge every day. Sell it, explain it or nail the interview question, out loud, and Zedd scores you. Free in your browser.'
+  const image = `/software/offthepage/card?${shared.query}`
+  return {
+    ...metadata,
+    metadataBase: new URL('https://614restore.com'),
+    title,
+    openGraph: { title, description, url: 'https://614restore.com/software/offthepage', images: [{ url: image, width: 1080, height: 1350 }] },
+    twitter: { card: 'summary_large_image', title, description, images: [image] },
+  }
 }
 
 const APP_STORE_URL = 'https://apps.apple.com/us/app/off-the-page/id6834362817?pt=82404571&ct=614restore-offthepage-page'
@@ -214,22 +235,7 @@ export default function OffThePagePage() {
         </div>
       </section>
 
-      <section className="py-10 bg-[#140b24] text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
-          <img src="/images/offthepage/zedd-head.png" alt="" className="w-16 h-auto" />
-          <div className="flex-1">
-            <p className="text-[#d6fa29] font-extrabold text-sm tracking-wide">NEW · DAILY CHALLENGE</p>
-            <h2 className="text-2xl font-heading font-bold">30 seconds. Say it out loud. Zedd scores you.</h2>
-            <p className="text-white/70 mt-1">Sell it, explain it or nail the interview question. Play free in your browser, no download.</p>
-          </div>
-          <Link
-            href="/software/offthepage/daily"
-            className="inline-flex items-center gap-2 bg-[#d6fa29] text-[#140b24] font-bold px-6 py-3 rounded-xl hover:brightness-95"
-          >
-            Play today&apos;s challenge <ArrowRight className="w-5 h-5" />
-          </Link>
-        </div>
-      </section>
+      <DailyChallenge />
 
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">

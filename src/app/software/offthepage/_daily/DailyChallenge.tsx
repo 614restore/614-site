@@ -1,12 +1,13 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Copy, Lightbulb, Megaphone, Mic, RotateCcw, Share2, ShieldCheck, Square, UserCheck } from 'lucide-react'
+import { Copy, ExternalLink, KeyRound, Lightbulb, Megaphone, Mic, RotateCcw, Share2, ShieldCheck, Square, UserCheck } from 'lucide-react'
 import AppStoreButton from '@/components/AppStoreButton'
 import {
   SECONDS, TONES, TONE_TITLES, TOO_SHORT_WORDS, TRACKS, TRACK_TITLES, contentParts, dayNumber, deliveryParts, fallbackVerdict,
   localDateString, overall, promptFor, words, type Judgement, type PitchPart, type Tone, type Track,
 } from '@/lib/offthepage/daily'
+import { JudgeError, PROVIDERS, isProvider, judgeWithKey, type ProviderId } from '@/lib/offthepage/judges'
 import { buildShareQuery, shareParams, type Shared } from './share'
 
 const APP_STORE_URL = 'https://apps.apple.com/us/app/off-the-page/id6834362817?pt=82404571&ct=614restore-offthepage-page'
@@ -31,7 +32,15 @@ type Result = {
   note?: string
 }
 
-type Saved = { tone?: Tone; streak?: number; lastDay?: number; results?: Record<string, { score: number; verdict: string }> }
+type Judge = { provider: ProviderId; key: string }
+
+type Saved = {
+  tone?: Tone
+  streak?: number
+  lastDay?: number
+  results?: Record<string, { score: number; verdict: string }>
+  judge?: Judge // only when the player ticks "Remember on this device"
+}
 
 // Minimal typing for the Web Speech API, which TypeScript's DOM library doesn't include.
 type Recognition = {
@@ -113,6 +122,11 @@ export default function DailyChallenge() {
   const [streak, setStreak] = useState(0)
   const [friend, setFriend] = useState<Shared | null>(null)
   const [shareNote, setShareNote] = useState<string | null>(null)
+  const [judge, setJudge] = useState<Judge | null>(null)
+  const [keyPanel, setKeyPanel] = useState(false)
+  const [draftProvider, setDraftProvider] = useState<ProviderId>('groq')
+  const [draftKey, setDraftKey] = useState('')
+  const [remember, setRemember] = useState(false)
 
   const recognition = useRef<Recognition | null>(null)
   const listening = useRef(false)
@@ -125,12 +139,22 @@ export default function DailyChallenge() {
     setToday(localDateString())
     const saved = load()
     if (saved.tone && TONES.includes(saved.tone)) setTone(saved.tone)
+    if (saved.judge && isProvider(saved.judge.provider) && typeof saved.judge.key === 'string') {
+      setJudge(saved.judge)
+      setRemember(true)
+    }
     const day = dayNumber(localDateString())
     setStreak(saved.lastDay !== undefined && day - saved.lastDay <= 1 ? saved.streak ?? 0 : 0)
     const shared = shareParams(new URLSearchParams(window.location.search))
     if (shared) {
       setFriend(shared)
       setTrack(shared.track)
+    }
+    // Links to the game (shared scores, the app's share card) land on it once the page has settled.
+    if (shared || window.location.hash === '#daily-challenge') {
+      const go = () => document.getElementById('daily-challenge')?.scrollIntoView({ behavior: 'instant' as ScrollBehavior })
+      if (document.readyState === 'complete') setTimeout(go, 50)
+      else window.addEventListener('load', () => setTimeout(go, 50), { once: true })
     }
     const SR = recognitionClass()
     if (!SR) {
@@ -151,6 +175,24 @@ export default function DailyChallenge() {
     save({ ...load(), tone: next })
   }
 
+  const saveKey = () => {
+    const key = draftKey.trim()
+    if (!key) return
+    const next = { provider: draftProvider, key }
+    setJudge(next)
+    setDraftKey('')
+    setKeyPanel(false)
+    const saved = load()
+    if (remember) save({ ...saved, judge: next })
+    else if (saved.judge) save({ ...saved, judge: undefined })
+  }
+
+  const removeKey = () => {
+    setJudge(null)
+    setRemember(false)
+    save({ ...load(), judge: undefined })
+  }
+
   const clearTimer = () => {
     if (timer.current) clearInterval(timer.current)
     timer.current = null
@@ -164,17 +206,15 @@ export default function DailyChallenge() {
       let content = contentParts(track, prompt, transcript)
       let judgement: Judgement | null = null
       let note: string | undefined
-      try {
-        const reply = await fetch('/api/offthepage/score', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ track, promptId: prompt.id, tone, transcript }),
-        })
-        if (reply.ok) judgement = (await reply.json()) as Judgement
-        else if (reply.status === 429) note = 'You’ve used today’s AI scores, so Zedd used his quick word checks for this one.'
-        else note = 'Zedd’s AI judge is resting, so he used his quick word checks for this one.'
-      } catch {
-        note = 'Zedd couldn’t reach his AI judge, so he used his quick word checks for this one.'
+      if (judge) {
+        try {
+          judgement = await judgeWithKey(judge.provider, judge.key, track, tone, prompt, transcript)
+        } catch (error) {
+          const why = error instanceof JudgeError ? error.message : 'Zedd couldn’t reach your AI.'
+          note = `${why} Zedd used his quick word checks for this one.`
+        }
+      } else {
+        note = 'Scored with Zedd’s quick word checks. Add your own free AI key for deeper feedback.'
       }
       if (judgement) content = judgement.parts
       const total = overall(content, delivery.parts)
@@ -200,7 +240,7 @@ export default function DailyChallenge() {
       setResult(finished)
       setPhase('result')
     },
-    [prompt, today, track, tone],
+    [prompt, today, track, tone, judge],
   )
 
   const finish = useCallback(() => {
@@ -300,7 +340,7 @@ export default function DailyChallenge() {
   }
 
   const shareUrl = result && today
-    ? `${window.location.origin}/software/offthepage/daily?${buildShareQuery(result.track, result.promptId, result.score, result.verdict, today)}`
+    ? `${window.location.origin}/software/offthepage?${buildShareQuery(result.track, result.promptId, result.score, result.verdict, today)}`
     : ''
 
   const share = async () => {
@@ -330,14 +370,14 @@ export default function DailyChallenge() {
   const ring = 2 * Math.PI * 54
 
   return (
-    <div className="pt-28 pb-16 text-white bg-gradient-to-b from-[#0d0a12] via-[#1b1030] to-[#291247]">
+    <section id="daily-challenge" className="scroll-mt-20 py-14 text-white bg-gradient-to-b from-[#0d0a12] via-[#1b1030] to-[#291247]">
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
         <header className="flex items-center gap-4 mb-8">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/offthepage/zedd-head.png" alt="Zedd" width={72} height={80} className="w-16 h-auto shrink-0" />
           <div>
             <p className="text-[#d6fa29] font-extrabold tracking-wide text-sm">OFF THE PAGE · DAILY CHALLENGE</p>
-            <h1 className="text-3xl sm:text-4xl font-heading font-bold">30 seconds. Say it out loud.</h1>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold">30 seconds. Say it out loud.</h2>
             <p className="text-white/70 mt-1">Learn it. Say it. Land it. A new challenge every day, and Zedd scores you.</p>
           </div>
         </header>
@@ -393,9 +433,95 @@ export default function DailyChallenge() {
           {tone === 'harsh' && <span className="text-white/60">Blunt about the pitch, never about you.</span>}
         </div>
 
+        <div className="mb-6 rounded-2xl bg-white/[0.06] border border-white/10 p-4 text-sm">
+          <div className="flex flex-wrap items-center gap-3">
+            <KeyRound className="w-5 h-5 text-[#2eebcc] shrink-0" aria-hidden />
+            <span className="flex-1 min-w-[12rem]">
+              {judge
+                ? `Zedd’s AI judge: ${PROVIDERS.find((p) => p.id === judge.provider)?.name}, with your own key.`
+                : 'Zedd scores with quick word checks. Add your own free AI key for deeper feedback.'}
+            </span>
+            {judge ? (
+              <button onClick={removeKey} disabled={busy} className="font-semibold underline hover:text-white/80 disabled:opacity-50">
+                Remove key
+              </button>
+            ) : (
+              <button
+                onClick={() => setKeyPanel((open) => !open)}
+                disabled={busy}
+                aria-expanded={keyPanel}
+                className="rounded-full border border-[#2eebcc] text-[#2eebcc] px-3 py-1 font-semibold hover:bg-[#2eebcc]/10 disabled:opacity-50"
+              >
+                {keyPanel ? 'Close' : 'Add my AI key'}
+              </button>
+            )}
+          </div>
+          {keyPanel && !judge && (
+            <div className="mt-4 space-y-3">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2" role="radiogroup" aria-label="AI provider">
+                {PROVIDERS.map((p) => (
+                  <button
+                    key={p.id}
+                    role="radio"
+                    aria-checked={draftProvider === p.id}
+                    onClick={() => setDraftProvider(p.id)}
+                    className={`rounded-xl px-2 py-2 font-semibold border ${
+                      draftProvider === p.id ? 'border-[#d6fa29] bg-[#d6fa29]/10 text-[#d6fa29]' : 'border-white/20 hover:bg-white/10'
+                    }`}
+                  >
+                    {p.name}
+                    <span className="block text-xs font-normal opacity-70">{p.free ? 'Free key' : 'You pay them'}</span>
+                  </button>
+                ))}
+              </div>
+              {(() => {
+                const p = PROVIDERS.find((x) => x.id === draftProvider)!
+                return (
+                  <p className="text-white/70">
+                    {p.howTo}{' '}
+                    <a href={p.keyURL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 underline text-white">
+                      Get a {p.name} key <ExternalLink className="w-3.5 h-3.5" aria-hidden />
+                    </a>
+                  </p>
+                )
+              })()}
+              <form
+                className="flex flex-col sm:flex-row gap-2"
+                onSubmit={(event) => {
+                  event.preventDefault()
+                  saveKey()
+                }}
+              >
+                <label className="sr-only" htmlFor="otp-ai-key">Your API key</label>
+                <input
+                  id="otp-ai-key"
+                  type="password"
+                  autoComplete="off"
+                  spellCheck={false}
+                  value={draftKey}
+                  onChange={(event) => setDraftKey(event.target.value)}
+                  placeholder={`${PROVIDERS.find((x) => x.id === draftProvider)!.keyPrefix}…`}
+                  className="flex-1 min-w-0 rounded-xl bg-black/30 border border-white/20 px-3 py-2 text-white placeholder:text-white/40"
+                />
+                <button type="submit" disabled={!draftKey.trim()} className="rounded-xl bg-[#d6fa29] text-[#140b24] font-bold px-4 py-2 disabled:opacity-50">
+                  Use this key
+                </button>
+              </form>
+              <label className="flex items-center gap-2 text-white/80">
+                <input type="checkbox" checked={remember} onChange={(event) => setRemember(event.target.checked)} />
+                Remember on this device
+              </label>
+              <p className="text-white/60">
+                Your key goes only to the provider you picked, straight from this browser. We never see it. Without “Remember”, it’s
+                forgotten when you leave the page.
+              </p>
+            </div>
+          )}
+        </div>
+
         <section className="rounded-3xl bg-white/[0.06] border border-white/10 p-6 sm:p-8 mb-6" aria-live="polite">
           <p className="text-white/60 text-sm font-semibold uppercase tracking-wide">Today · {TRACK_TITLES[track]}</p>
-          <h2 className="text-2xl sm:text-3xl font-bold mt-2 min-h-[2.5rem]">{prompt?.prompt ?? ' '}</h2>
+          <h3 className="text-2xl sm:text-3xl font-bold mt-2 min-h-[2.5rem]">{prompt?.prompt ?? ' '}</h3>
           {prompt?.buyer && (
             <p className="mt-3 text-white/80">
               <span className="font-semibold text-[#ff5fd2]">The buyer says:</span> “{prompt.buyer}”
@@ -550,13 +676,14 @@ export default function DailyChallenge() {
         <p className="flex gap-2 text-sm text-white/70">
           <ShieldCheck className="w-5 h-5 shrink-0 text-[#2eebcc]" aria-hidden />
           <span>
-            {onDevice
-              ? 'Your voice stays on your device. Only the words you said are sent to be scored, and they aren’t stored.'
-              : 'We never receive your voice: your browser turns it into words (some browsers use their maker’s speech service for this). Only the words you said are sent to be scored, and they aren’t stored.'}{' '}
+            {onDevice ? 'Your voice stays on your device.' : 'We never receive your voice: your browser turns it into words (some browsers use their maker’s speech service for this).'}{' '}
+            {judge
+              ? 'Only the words you said are sent to be scored, straight from your browser to the AI you picked, under its terms. We never see them.'
+              : 'Without an AI key, scoring happens right in your browser and your words aren’t sent anywhere.'}{' '}
             <a href="/software/offthepage/privacy#daily-challenge" className="underline hover:text-white">Privacy</a>
           </span>
         </p>
       </div>
-    </div>
+    </section>
   )
 }
