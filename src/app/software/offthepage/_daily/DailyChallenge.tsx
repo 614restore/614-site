@@ -4,8 +4,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Copy, ExternalLink, KeyRound, Lightbulb, Megaphone, Mic, RotateCcw, Share2, ShieldCheck, Square, UserCheck } from 'lucide-react'
 import AppStoreButton from '@/components/AppStoreButton'
 import {
-  SECONDS, TONES, secondsFor, TONE_TITLES, TOO_SHORT_WORDS, TRACKS, TRACK_TITLES, contentParts, dayNumber, deliveryParts, fallbackVerdict,
-  localDateString, overall, promptFor, words, type Judgement, type PitchPart, type Tone, type Track,
+  SECONDS, TONES, LENGTHS, LENGTH_SECONDS, LENGTH_SPOKEN, LENGTH_TITLES, isLength, TONE_TITLES, TOO_SHORT_WORDS, TRACKS, TRACK_TITLES, contentParts, dayNumber, deliveryParts, fallbackVerdict,
+  localDateString, overall, promptFor, words, type Judgement, type PitchPart, type Tone, type Length, type Track,
 } from '@/lib/offthepage/daily'
 import { JudgeError, PROVIDERS, isProvider, judgeWithKey, type ProviderId } from '@/lib/offthepage/judges'
 import { buildShareQuery, shareParams, type Shared } from './share'
@@ -36,6 +36,7 @@ type Judge = { provider: ProviderId; key: string }
 
 type Saved = {
   tone?: Tone
+  length?: Length
   streak?: number
   lastDay?: number
   results?: Record<string, { score: number; verdict: string }>
@@ -117,7 +118,8 @@ export default function DailyChallenge() {
   const [onDevice, setOnDevice] = useState(false)
   const [heard, setHeard] = useState('')
   const [timeLeft, setTimeLeft] = useState(SECONDS)
-  const limit = secondsFor(track)
+  const [length, setLength] = useState<Length>('mid')
+  const limit = LENGTH_SECONDS[length]
   const [problem, setProblem] = useState<string | null>(null)
   const [result, setResult] = useState<Result | null>(null)
   const [streak, setStreak] = useState(0)
@@ -140,6 +142,7 @@ export default function DailyChallenge() {
     setToday(localDateString())
     const saved = load()
     if (saved.tone && TONES.includes(saved.tone)) setTone(saved.tone)
+    if (isLength(saved.length)) setLength(saved.length)
     if (saved.judge && isProvider(saved.judge.provider) && typeof saved.judge.key === 'string') {
       setJudge(saved.judge)
       setRemember(true)
@@ -174,6 +177,11 @@ export default function DailyChallenge() {
   const chooseTone = (next: Tone) => {
     setTone(next)
     save({ ...load(), tone: next })
+  }
+
+  const chooseLength = (next: Length) => {
+    setLength(next)
+    save({ ...load(), length: next })
   }
 
   const saveKey = () => {
@@ -230,7 +238,7 @@ export default function DailyChallenge() {
         delivery: delivery.parts,
         strength: judgement?.strength || best?.note || '',
         fix: judgement?.fix || worst?.note || '',
-        verdict: judgement?.verdict || fallbackVerdict(total, tone, prompt.id + transcript),
+        verdict: judgement?.verdict || fallbackVerdict(total, tone, prompt.id + transcript, track),
         wpm: delivery.wpm,
         fillers: delivery.fillers,
         transcript,
@@ -416,6 +424,23 @@ export default function DailyChallenge() {
           })}
         </div>
 
+        <div className="grid grid-cols-3 gap-2 mb-4" role="radiogroup" aria-label="Length">
+          {LENGTHS.map((l) => (
+            <button
+              key={l}
+              role="radio"
+              aria-checked={length === l}
+              disabled={busy}
+              onClick={() => chooseLength(l)}
+              className={`rounded-xl px-2 py-2 font-semibold text-sm transition-colors disabled:opacity-50 ${
+                length === l ? 'bg-[#2eebcc] text-[#140b24]' : 'bg-white/10 hover:bg-white/15'
+              }`}
+            >
+              {LENGTH_TITLES[l]}
+            </button>
+          ))}
+        </div>
+
         <div className="flex flex-wrap items-center gap-2 mb-6 text-sm">
           <span className="text-white/70">Zedd’s feedback:</span>
           {TONES.map((t) => (
@@ -431,7 +456,7 @@ export default function DailyChallenge() {
               {TONE_TITLES[t]}
             </button>
           ))}
-          {tone === 'harsh' && <span className="text-white/60">Blunt about the pitch, never about you.</span>}
+          {tone === 'harsh' && <span className="text-white/60">Blunt about what you said, never about you.</span>}
         </div>
 
         <div className="mb-6 rounded-2xl bg-white/[0.06] border border-white/10 p-4 text-sm">
@@ -553,7 +578,7 @@ export default function DailyChallenge() {
               >
                 <Mic className="w-6 h-6" aria-hidden /> {phase === 'short' ? 'Try again' : 'Start talking'}
               </button>
-              <p className="text-white/60 text-sm mt-3">You get {limit} seconds. Your browser will ask to use the microphone.</p>
+              <p className="text-white/60 text-sm mt-3">You get {LENGTH_SPOKEN[length]}. Your browser will ask to use the microphone.</p>
             </div>
           )}
 

@@ -26,10 +26,14 @@ export const TONE_TITLES: Record<Tone, string> = { kind: 'Kind', honest: 'Honest
 
 export const SECONDS: number = book.seconds
 
-/** Sell It gets 45 seconds; the other tracks use SECONDS. Same file and rule as the app. */
-export function secondsFor(track: Track): number {
-  const perTrack = (book as { trackSeconds?: Partial<Record<Track, number>> }).trackSeconds
-  return perTrack?.[track] ?? SECONDS
+/** How long the player gets: Short, Mid or Long. Same three choices as the app (ChallengeLength). */
+export type Length = 'short' | 'mid' | 'long'
+export const LENGTHS: Length[] = ['short', 'mid', 'long']
+export const LENGTH_SECONDS: Record<Length, number> = { short: 30, mid: 45, long: 90 }
+export const LENGTH_TITLES: Record<Length, string> = { short: 'Short · 30s', mid: 'Mid · 45s', long: 'Long · 1:30' }
+export const LENGTH_SPOKEN: Record<Length, string> = { short: '30 seconds', mid: '45 seconds', long: 'a minute and a half' }
+export function isLength(value: unknown): value is Length {
+  return value === 'short' || value === 'mid' || value === 'long'
 }
 export const TOO_SHORT_WORDS = 12
 export const MAX_TRANSCRIPT = 1_500
@@ -280,9 +284,41 @@ export function overall(content: PitchPart[], delivery: PitchPart[]): number {
 
 // MARK: Zedd's reaction without an AI
 
-export function fallbackVerdict(score: number, tone: Tone, seed: string): string {
+/** Zedd's one-liner without an AI, worded for the track (PitchJudge.verdict in the app). */
+export function fallbackVerdict(score: number, tone: Tone, seed: string, track: Track = 'sell'): string {
   const band = score >= 80 ? 2 : score >= 55 ? 1 : 0
-  const lines = {
+  const lines = (track === 'interview' ? interviewLines : track === 'explain' ? explainLines : sellLines)[tone][band]
+  // The same stable hash as the app, so the same pitch always gets the same line.
+  let hash = 0
+  for (const ch of seed) hash = (hash * 31 + (ch.codePointAt(0) ?? 0)) % 2_147_483_648
+  return lines[hash % lines.length]
+}
+
+const interviewLines: Record<Tone, string[][]> = {
+  kind: [["Good start! Let's build on it tomorrow.", 'Every great answer starts somewhere. Keep going!'],
+    ["Solid! A little polish and they'll remember you.", "You're close. I'm leaning in."],
+    ["That was out of this world. I'd hire you twice.", 'Wow. Even my antennae want to hire you.']],
+  honest: [['Not there yet. You lost me early.', "I'm not convinced. Lead with a real example."],
+    ["Decent, but I'm not convinced yet.", 'Halfway there. Tighten it up.'],
+    ["Strong. You'd get the callback.", 'That works. Clear, confident, specific.']],
+  harsh: [['I checked out halfway through. So would your potential employer.', "That wasn't an answer, that was a list. Again."],
+    ["I've heard better from a vending machine. Close, though.", "Average answer. Average doesn't get hired."],
+    ["Fine. You earned it. Don't get cocky.", 'Annoyingly good. Do it again tomorrow.']],
+}
+
+const explainLines: Record<Tone, string[][]> = {
+  kind: [["Good start! Let's build on it tomorrow.", 'Every great explanation starts somewhere. Keep going!'],
+    ['Solid! A little polish and it clicks.', "You're close. I'm starting to get it."],
+    ['That was out of this world. Even I get it now.', 'Wow. Even my antennae understood that.']],
+  honest: [['Not there yet. You lost me early.', "I'm still confused. Start with the big idea."],
+    ["Decent, but I'm still a little lost.", 'Halfway there. Tighten it up.'],
+    ['Strong. I could teach that now.', 'That works. Clear, simple, complete.']],
+  harsh: [['I checked out halfway through. So would your listener.', "That wasn't an explanation, that was a list. Again."],
+    ["I've heard clearer from a vending machine. Close, though.", 'Average explanation. Average gets forgotten.'],
+    ["Fine. You earned it. Don't get cocky.", 'Annoyingly good. Do it again tomorrow.']],
+}
+
+const sellLines: Record<Tone, string[][]> = {
     kind: [["Good start! Let's build on it tomorrow.", 'Every great pitch starts somewhere. Keep going!'],
       ["Solid! A little polish and you've got me.", "You're close. I'm leaning in."],
       ["That was out of this world. I'd buy it twice.", 'Wow. Even my antennae are convinced.']],
@@ -292,11 +328,6 @@ export function fallbackVerdict(score: number, tone: Tone, seed: string): string
     harsh: [['I checked out halfway through. So would your customer.', "That wasn't a pitch, that was a list. Again."],
       ["I've heard better from a vending machine. Close, though.", 'Average pitch. Average gets ignored.'],
       ["Fine. You earned it. Don't get cocky.", 'Annoyingly good. Do it again tomorrow.']],
-  }[tone][band]
-  // The same stable hash as the app, so the same pitch always gets the same line.
-  let hash = 0
-  for (const ch of seed) hash = (hash * 31 + (ch.codePointAt(0) ?? 0)) % 2_147_483_648
-  return lines[hash % lines.length]
 }
 
 // MARK: The AI judge (PitchJudge.system / PitchJudge.user)
@@ -313,14 +344,21 @@ const rubrics: Record<Track, string> = {
   interview: 'Structure: did they give the situation, what they did, and the result? Specifics: did they use a real example or number? Relevance: did they answer the question asked?',
 }
 
+/** Who Zedd reacts as, so an interview answer is never judged like a sales pitch (PitchJudge.audience). */
+const audience: Record<Track, string> = {
+  sell: 'React as the buyer.',
+  interview: "React as the interviewer deciding whether to hire them; it's a job interview, so never mention customers, buying or selling.",
+  explain: 'React as someone learning the topic; never mention customers, buying or selling.',
+}
+
 export function systemPrompt(track: Track, tone: Tone): string {
-  return `You are Zedd, a friendly alien who judges short spoken answers (30 to 45 seconds) in a daily speaking game. ${toneGuidance[tone]}
+  return `You are Zedd, a friendly alien who judges short spoken answers (30 seconds to a minute and a half) in a daily speaking game. ${toneGuidance[tone]}
 Judge only what was actually said in the transcript. Never invent anything about the speaker, never add facts, and never claim they said something they didn't. The transcript came from speech recognition, so ignore small spelling or punctuation mistakes. Pace and filler words are measured separately; don't score them.
 Score each part from 0 to 10:
 ${rubrics[track]}
 Reply with JSON only, no other words:
 {"parts": [{"name": "", "score": 0, "note": ""}], "strength": "", "fix": "", "verdict": ""}
-note: one short sentence per part. strength: the best thing they did. fix: the one thing to change next time. verdict: your one-line reaction, under 15 words, in your tone, fit to share.`
+note: one short sentence per part. strength: the best thing they did. fix: the one thing to change next time. verdict: your one-line reaction, under 15 words, in your tone, fit to share. ${audience[track]}`
 }
 
 export function userPrompt(prompt: ChallengePrompt, transcript: string): string {
