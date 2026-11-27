@@ -28,7 +28,7 @@ export async function GET(request: Request) {
 
   const muted = 'rgba(255,255,255,0.75)'
   const score = shared ? String(shared.score) : '30s'
-  const promptText = shared ? shared.prompt.prompt : 'Sell it. Explain it. Nail the interview question. Out loud, in 30 seconds.'
+  const promptText = shared ? shared.prompt.prompt : 'Sell it. Explain it. Nail the interview question. Out loud, in under a minute.'
   const promptSize = promptText.length > 70 ? 40 : 46
   const verdict = shared?.verdict ? `“${shared.verdict.replace(/'/g, '’')}”` : '“Think you can talk your way past me?” — Zedd'
   const label = shared ? `${TRACK_TITLES[shared.track].toUpperCase()} · ${formatDate(shared.date)}` : 'A NEW CHALLENGE EVERY DAY'

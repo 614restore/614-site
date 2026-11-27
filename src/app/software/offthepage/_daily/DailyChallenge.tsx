@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Copy, ExternalLink, KeyRound, Lightbulb, Megaphone, Mic, RotateCcw, Share2, ShieldCheck, Square, UserCheck } from 'lucide-react'
 import AppStoreButton from '@/components/AppStoreButton'
 import {
-  SECONDS, TONES, TONE_TITLES, TOO_SHORT_WORDS, TRACKS, TRACK_TITLES, contentParts, dayNumber, deliveryParts, fallbackVerdict,
+  SECONDS, TONES, secondsFor, TONE_TITLES, TOO_SHORT_WORDS, TRACKS, TRACK_TITLES, contentParts, dayNumber, deliveryParts, fallbackVerdict,
   localDateString, overall, promptFor, words, type Judgement, type PitchPart, type Tone, type Track,
 } from '@/lib/offthepage/daily'
 import { JudgeError, PROVIDERS, isProvider, judgeWithKey, type ProviderId } from '@/lib/offthepage/judges'
@@ -117,6 +117,7 @@ export default function DailyChallenge() {
   const [onDevice, setOnDevice] = useState(false)
   const [heard, setHeard] = useState('')
   const [timeLeft, setTimeLeft] = useState(SECONDS)
+  const limit = secondsFor(track)
   const [problem, setProblem] = useState<string | null>(null)
   const [result, setResult] = useState<Result | null>(null)
   const [streak, setStreak] = useState(0)
@@ -248,7 +249,7 @@ export default function DailyChallenge() {
     listening.current = false
     clearTimer()
     recognition.current?.stop()
-    const seconds = Math.min(SECONDS, (Date.now() - startedAt.current) / 1000)
+    const seconds = Math.min(limit, (Date.now() - startedAt.current) / 1000)
     const transcript = (earlier.current + ' ' + current.current).replace(/\s+/g, ' ').trim()
     setHeard(transcript)
     if (words(transcript).length < TOO_SHORT_WORDS) {
@@ -256,7 +257,7 @@ export default function DailyChallenge() {
       return
     }
     void score(transcript, seconds)
-  }, [score])
+  }, [score, limit])
 
   useEffect(() => () => {
     listening.current = false
@@ -323,10 +324,10 @@ export default function DailyChallenge() {
       return
     }
     startedAt.current = Date.now()
-    setTimeLeft(SECONDS)
+    setTimeLeft(limit)
     setPhase('listening')
     timer.current = setInterval(() => {
-      const left = Math.max(0, SECONDS - (Date.now() - startedAt.current) / 1000)
+      const left = Math.max(0, limit - (Date.now() - startedAt.current) / 1000)
       setTimeLeft(Math.ceil(left))
       if (left <= 0) finish()
     }, 200)
@@ -377,7 +378,7 @@ export default function DailyChallenge() {
           <img src="/images/offthepage/zedd-head.png" alt="Zedd" width={72} height={80} className="w-16 h-auto shrink-0" />
           <div>
             <p className="text-[#d6fa29] font-extrabold tracking-wide text-sm">OFF THE PAGE · DAILY CHALLENGE</p>
-            <h2 className="text-3xl sm:text-4xl font-heading font-bold">30 seconds. Say it out loud.</h2>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold">Under a minute. Say it out loud.</h2>
             <p className="text-white/70 mt-1">Learn it. Say it. Land it. A new challenge every day, and Zedd scores you.</p>
           </div>
         </header>
@@ -552,7 +553,7 @@ export default function DailyChallenge() {
               >
                 <Mic className="w-6 h-6" aria-hidden /> {phase === 'short' ? 'Try again' : 'Start talking'}
               </button>
-              <p className="text-white/60 text-sm mt-3">You get {SECONDS} seconds. Your browser will ask to use the microphone.</p>
+              <p className="text-white/60 text-sm mt-3">You get {limit} seconds. Your browser will ask to use the microphone.</p>
             </div>
           )}
 
@@ -563,7 +564,7 @@ export default function DailyChallenge() {
                   <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="10" />
                   <circle
                     cx="60" cy="60" r="54" fill="none" stroke="#d6fa29" strokeWidth="10" strokeLinecap="round"
-                    strokeDasharray={ring} strokeDashoffset={ring * (1 - timeLeft / SECONDS)}
+                    strokeDasharray={ring} strokeDashoffset={ring * (1 - timeLeft / limit)}
                     style={{ transition: 'stroke-dashoffset 0.2s linear' }}
                   />
                 </svg>

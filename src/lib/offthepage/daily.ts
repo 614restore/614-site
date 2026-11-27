@@ -25,6 +25,12 @@ export const TRACK_TITLES: Record<Track, string> = { sell: 'Sell It', explain: '
 export const TONE_TITLES: Record<Tone, string> = { kind: 'Kind', honest: 'Honest', harsh: 'Harsh' }
 
 export const SECONDS: number = book.seconds
+
+/** Sell It gets 45 seconds; the other tracks use SECONDS. Same file and rule as the app. */
+export function secondsFor(track: Track): number {
+  const perTrack = (book as { trackSeconds?: Partial<Record<Track, number>> }).trackSeconds
+  return perTrack?.[track] ?? SECONDS
+}
 export const TOO_SHORT_WORDS = 12
 export const MAX_TRANSCRIPT = 1_500
 
@@ -308,7 +314,7 @@ const rubrics: Record<Track, string> = {
 }
 
 export function systemPrompt(track: Track, tone: Tone): string {
-  return `You are Zedd, a friendly alien who judges 30-second spoken answers in a daily speaking game. ${toneGuidance[tone]}
+  return `You are Zedd, a friendly alien who judges short spoken answers (30 to 45 seconds) in a daily speaking game. ${toneGuidance[tone]}
 Judge only what was actually said in the transcript. Never invent anything about the speaker, never add facts, and never claim they said something they didn't. The transcript came from speech recognition, so ignore small spelling or punctuation mistakes. Pace and filler words are measured separately; don't score them.
 Score each part from 0 to 10:
 ${rubrics[track]}
