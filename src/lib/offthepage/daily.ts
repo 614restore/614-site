@@ -29,14 +29,14 @@ export const SECONDS: number = book.seconds
 /** How long the player gets: Short, Mid or Long. Same three choices as the app (ChallengeLength). */
 export type Length = 'short' | 'mid' | 'long'
 export const LENGTHS: Length[] = ['short', 'mid', 'long']
-export const LENGTH_SECONDS: Record<Length, number> = { short: 30, mid: 45, long: 90 }
-export const LENGTH_TITLES: Record<Length, string> = { short: 'Short · 30s', mid: 'Mid · 45s', long: 'Long · 1:30' }
-export const LENGTH_SPOKEN: Record<Length, string> = { short: '30 seconds', mid: '45 seconds', long: 'a minute and a half' }
+export const LENGTH_SECONDS: Record<Length, number> = { short: 30, mid: 45, long: 120 }
+export const LENGTH_TITLES: Record<Length, string> = { short: 'Short · 30s', mid: 'Mid · 45s', long: 'Long · 2:00' }
+export const LENGTH_SPOKEN: Record<Length, string> = { short: '30 seconds', mid: '45 seconds', long: '2 minutes' }
 export function isLength(value: unknown): value is Length {
   return value === 'short' || value === 'mid' || value === 'long'
 }
 export const TOO_SHORT_WORDS = 12
-export const MAX_TRANSCRIPT = 1_500
+export const MAX_TRANSCRIPT = 2_500
 
 const tracks = book.tracks as Record<Track, ChallengePrompt[]>
 
@@ -352,7 +352,7 @@ const audience: Record<Track, string> = {
 }
 
 export function systemPrompt(track: Track, tone: Tone): string {
-  return `You are Zedd, a friendly alien who judges short spoken answers (30 seconds to a minute and a half) in a daily speaking game. ${toneGuidance[tone]}
+  return `You are Zedd, a friendly alien who judges short spoken answers (30 seconds to 2 minutes) in a daily speaking game. ${toneGuidance[tone]}
 Judge only what was actually said in the transcript. Never invent anything about the speaker, never add facts, and never claim they said something they didn't. The transcript came from speech recognition, so ignore small spelling or punctuation mistakes. Pace and filler words are measured separately; don't score them.
 Score each part from 0 to 10:
 ${rubrics[track]}
