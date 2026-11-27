@@ -30,24 +30,45 @@ export function isProvider(value: unknown): value is ProviderId {
 }
 
 export class JudgeError extends Error {
-  constructor(public kind: 'key' | 'limit' | 'other', message: string) {
+  constructor(public kind: 'key' | 'limit' | 'billing' | 'other', message: string) {
     super(message)
   }
 }
 
-async function post(url: string, headers: Record<string, string>, body: unknown): Promise<unknown> {
+/** The provider's own short explanation from an error reply, if it gave one. */
+function providerMessage(text: string): string {
+  try {
+    const data = JSON.parse(text) as { error?: { message?: unknown } | unknown[]; message?: unknown }
+    const error = Array.isArray(data) ? (data[0] as { error?: { message?: unknown } })?.error : data.error
+    const message = (error as { message?: unknown } | undefined)?.message ?? data.message
+    return typeof message === 'string' ? message.trim().slice(0, 160) : ''
+  } catch {
+    return ''
+  }
+}
+
+async function post(url: string, name: string, headers: Record<string, string>, body: unknown): Promise<unknown> {
   const reply = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', ...headers },
     body: JSON.stringify(body),
     signal: AbortSignal.timeout(60_000),
   })
+  if (reply.ok) return reply.json()
+  const text = await reply.text()
+  const said = providerMessage(text)
+  const lower = text.toLowerCase()
   // Google answers a bad key with 400 API_KEY_INVALID rather than 401.
-  const badKey = reply.status === 401 || reply.status === 403 || (reply.status === 400 && /api[ _-]?key/i.test(await reply.clone().text()))
-  if (badKey) throw new JudgeError('key', 'That key was turned down. Check it, or remove it and add it again.')
-  if (reply.status === 429) throw new JudgeError('limit', 'Your AI provider says you’ve hit its limit for now.')
-  if (!reply.ok) throw new JudgeError('other', `Your AI provider returned an error (${reply.status}).`)
-  return reply.json()
+  if (reply.status === 401 || reply.status === 403 || (reply.status === 400 && /api[ _-]?key/i.test(text))) {
+    throw new JudgeError('key', `${name} turned down that key. Check it, or remove it and add it again.`)
+  }
+  // Out of credit: 402, or OpenAI's 429 insufficient_quota, or Anthropic's 400 "credit balance is too low".
+  // (Free Gemini keys say "quota" for an ordinary rate limit, so plain "quota" isn't counted.)
+  if (reply.status === 402 || /credit balance|billing|insufficient_quota|insufficient balance|payment required|add credit/.test(lower)) {
+    throw new JudgeError('billing', `Your key works, but your ${name} account is out of credit or needs billing set up. Add credit with ${name}, or use a free ${PROVIDERS.filter((p) => p.free && p.name !== name).map((p) => p.name).join(' or ')} key instead.`)
+  }
+  if (reply.status === 429) throw new JudgeError('limit', `${name} says you’ve hit its limit for now. Try again in a minute.`)
+  throw new JudgeError('other', `${name} returned an error (${reply.status})${said ? `: ${said}` : '.'}`)
 }
 
 type ChatReply = { choices?: { message?: { content?: string } }[] }
@@ -57,11 +78,12 @@ type MessagesReply = { content?: { type?: string; text?: string }[] }
 export async function judgeWithKey(
   provider: ProviderId, key: string, track: Track, tone: Tone, prompt: ChallengePrompt, transcript: string,
 ): Promise<Judgement> {
+  const name = PROVIDERS.find((p) => p.id === provider)?.name ?? 'Your AI provider'
   const system = systemPrompt(track, tone)
   const user = userPrompt(prompt, transcript)
   let text = ''
   if (provider === 'anthropic') {
-    const data = (await post('https://api.anthropic.com/v1/messages', {
+    const data = (await post('https://api.anthropic.com/v1/messages', name, {
       'x-api-key': key, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true',
     }, { model: 'claude-haiku-5-5', max_tokens: 1024, system, messages: [{ role: 'user', content: user }] })) as MessagesReply
     text = data.content?.filter((c) => c.type === 'text').map((c) => c.text ?? '').join('') ?? ''
@@ -79,7 +101,7 @@ export async function judgeWithKey(
     }
     // gpt-oss thinks before answering; keep that short and leave room for the answer (as the app does).
     if (provider === 'groq') Object.assign(body, { reasoning_effort: 'low', max_tokens: 4096 })
-    const data = (await post(url, { Authorization: `Bearer ${key}` }, body)) as ChatReply
+    const data = (await post(url, name, { Authorization: `Bearer ${key}` }, body)) as ChatReply
     text = data.choices?.[0]?.message?.content ?? ''
   }
   const judgement = parseJudgement(text)
