@@ -1,13 +1,16 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, Check, FileDown, Mail, ShieldCheck } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import AppStoreButton from '@/components/AppStoreButton'
+import DailyChallenge from './_daily/DailyChallenge'
+import { shareParams } from './_daily/share'
 
-export const metadata = {
+const metadata: Metadata = {
   title: 'Off the Page: Read Aloud, Study & Interview Prep | 614 Restore',
   description:
-    'Off the Page for iPhone and iPad reads anything aloud, records lectures, turns notes into study guides, flashcards and practice tests, runs study rooms over FaceTime, and coaches you for interviews. Free 3-day trial, then a one-time $9.99 unlock, $4.99 at launch.',
+    'Off the Page for iPhone and iPad reads anything aloud, records lectures, turns notes into study guides, spaced-repetition flashcards and practice tests, runs study rooms over FaceTime, and coaches you for interviews. Free 3-day trial, then a one-time $9.99 unlock, $4.99 at launch.',
   openGraph: {
     title: 'Off the Page: Hear it. Study it. Land the job.',
     description:
@@ -15,6 +18,24 @@ export const metadata = {
     url: 'https://614restore.com/software/offthepage',
     images: ['/images/offthepage/listen-01.jpg'],
   },
+}
+
+type Props = { searchParams: Record<string, string | string[] | undefined> }
+
+// A shared Daily Challenge result (?t=…&s=…) previews as that player's score card.
+export function generateMetadata({ searchParams }: Props): Metadata {
+  const shared = shareParams(searchParams)
+  if (!shared) return metadata
+  const title = `I scored ${shared.score} on today's Off the Page Daily Challenge. Can you beat it?`
+  const description = 'A new 30-second speaking challenge every day. Sell it, explain it or nail the interview question, out loud, and Zedd scores you. Free in your browser.'
+  const image = `/software/offthepage/card?${shared.query}`
+  return {
+    ...metadata,
+    metadataBase: new URL('https://614restore.com'),
+    title,
+    openGraph: { title, description, url: 'https://614restore.com/software/offthepage', images: [{ url: image, width: 1080, height: 1350 }] },
+    twitter: { card: 'summary_large_image', title, description, images: [image] },
+  }
 }
 
 const APP_STORE_URL = 'https://apps.apple.com/us/app/off-the-page/id6834362817?pt=82404571&ct=614restore-offthepage-page'
@@ -82,7 +103,7 @@ const featureGroups = [
     items: [
       'Zedd Notes: a folder of notes becomes a study guide with practice questions',
       'Practice tests with a timer, instant grading and explanations',
-      'Flashcards with spaced repetition, and a dictionary of your key terms',
+      'Zedd brings back the cards you’re about to forget (spaced repetition), plus a dictionary of your key terms',
       'Photos and scans of whiteboards, slides and pages become notes',
     ],
   },
@@ -117,6 +138,7 @@ const featureGroups = [
 
 const advantages = [
   ['One price', '$9.99 once after a free 3-day trial, and $4.99 at launch. No subscription, nothing charged automatically.'],
+  ['Remembers for you', 'Zedd brings back the cards you’re about to forget. Cards you miss come back sooner; cards you know wait days.'],
   ['Private by design', 'No account, no tracking, no Off the Page server. AI runs on your device by default.'],
   ['Works offline', 'Voices, transcripts and on-device AI work without internet.'],
   ['Everything connects', 'A recording becomes notes, a study guide, flashcards, a test and a group game.'],
@@ -128,6 +150,10 @@ const faqs = [
   {
     q: 'How much does it cost?',
     a: 'Off the Page is a free download with a 3-day free trial of every feature. After that, a one-time Lifetime unlock keeps everything: $9.99, or $4.99 at launch through December 31, 2026. There is no subscription, and nothing is charged automatically.',
+  },
+  {
+    q: 'Does it use spaced repetition?',
+    a: 'Yes. Zedd brings back the cards you’re about to forget. After each flashcard, tap Again, Good or Easy: a card you miss comes back in about a minute, and a card you know comes back after a day, then three days, then longer gaps. The Study tab shows how many cards are due today, and Review gathers the due cards from every deck.',
   },
   {
     q: 'I bought it on another device. How do I get it back?',
@@ -213,6 +239,8 @@ export default function OffThePagePage() {
           </div>
         </div>
       </section>
+
+      <DailyChallenge />
 
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">

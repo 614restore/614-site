@@ -9,7 +9,7 @@ export const metadata = {
 
 const SUPPORT_EMAIL = 'devmgr.app@gmail.com'
 
-const sections: { title: string; body: string[] }[] = [
+const sections: { id?: string; title: string; body: string[] }[] = [
   {
     title: 'The short version',
     body: [
@@ -20,6 +20,16 @@ const sections: { title: string; body: string[] }[] = [
     title: 'This website',
     body: [
       'Everything above and below is about the app. This website (614restore.com, including the Off the Page pages) is different: it uses Google Analytics and the Meta Pixel to count visits and measure our ads. They may set cookies in your browser and receive standard information such as the pages you view, your browser type, and your IP address, under Google\'s and Meta\'s privacy policies. You can block or clear these cookies in your browser settings. None of this is in the app.',
+    ],
+  },
+  {
+    id: 'daily-challenge',
+    title: 'The Daily Challenge on this website',
+    body: [
+      'The Daily Challenge on 614restore.com/software/offthepage uses your browser\'s own speech recognition to turn what you say into words. We never receive your audio. Depending on your browser, its speech recognition may run on your device or through your browser maker\'s speech service (for example Google for Chrome or Apple for Safari), under their privacy policies.',
+      'Without an AI key, your answer is scored right in your browser with word checks, and your words are not sent anywhere.',
+      'If you add your own AI key (for example a free Groq or Google Gemini key), your browser sends the words you said, the day\'s prompt and the feedback style you picked straight to that provider to be scored, under that provider\'s terms. For example, Google may use what is sent with a free Gemini key to improve its products. We never receive your key or your words.',
+      'Your key (only if you tick Remember on this device), feedback style, streak and today\'s scores are saved only in your browser\'s local storage, which you can clear at any time. The Daily Challenge asks for no name, account or email and sets no cookies of its own.',
     ],
   },
   {
@@ -93,10 +103,10 @@ export default function OffThePagePrivacy() {
             ← Off the Page
           </Link>
           <h1 className="text-4xl font-heading font-bold text-steel-900 mt-4 mb-2">Off the Page Privacy Policy</h1>
-          <p className="text-steel-500 mb-10">Last updated November 21, 2026</p>
+          <p className="text-steel-500 mb-10">Last updated November 25, 2026</p>
 
           {sections.map((section) => (
-            <section key={section.title} className="mb-8">
+            <section key={section.title} id={section.id} className="mb-8 scroll-mt-28">
               <h2 className="text-xl font-heading font-bold text-steel-900 mb-3">{section.title}</h2>
               {section.body.map((paragraph) => (
                 <p key={paragraph} className="text-steel-600 leading-relaxed mb-3">
