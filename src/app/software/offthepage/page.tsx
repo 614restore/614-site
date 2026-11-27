@@ -27,7 +27,7 @@ export function generateMetadata({ searchParams }: Props): Metadata {
   const shared = shareParams(searchParams)
   if (!shared) return metadata
   const title = `I scored ${shared.score} on today's Off the Page Daily Challenge. Can you beat it?`
-  const description = 'A new 30-second speaking challenge every day. Sell it, explain it or nail the interview question, out loud, and Zedd scores you. Free in your browser.'
+  const description = 'A new speaking challenge every day, under a minute. Sell it, explain it or nail the interview question, out loud, and Zedd scores you. Free in your browser.'
   const image = `/software/offthepage/card?${shared.query}`
   return {
     ...metadata,
