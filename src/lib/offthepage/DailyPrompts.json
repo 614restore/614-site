@@ -2,7 +2,6 @@
   "about": "Off the Page Daily Challenge. Shared by the iPhone app and the web game, so everyone on a track gets the same prompt on the same day. Day number = whole days from epoch to the player's local calendar date; prompt = list[day mod count] (wrap negatives). Keep this file identical in both places.",
   "epoch": "2026-12-01",
   "seconds": 30,
-  "trackSeconds": { "sell": 45 },
   "tracks": {
     "sell": [
       { "id": "sell-umbrella", "prompt": "Sell me this broken umbrella.", "buyer": "I'm standing in the rain, and it has one bent spoke." },
