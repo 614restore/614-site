@@ -394,7 +394,8 @@ export default function DailyChallenge() {
         {friend && phase === 'idle' && (
           <div className="mb-6 rounded-2xl border border-[#d6fa29]/40 bg-[#d6fa29]/10 p-4">
             <p className="font-semibold">
-              A friend scored <span className="text-[#d6fa29]">{friend.score}</span> on {TRACK_TITLES[friend.track]}.
+              A friend scored <span className="text-[#d6fa29]">{friend.score}</span> on {TRACK_TITLES[friend.track]}
+              {friend.tries ? ` in ${friend.tries} ${friend.tries === 1 ? 'try' : 'tries'}` : ''}.
               {friend.verdict && <span className="italic text-white/80"> Zedd said “{friend.verdict}”</span>} Can you beat it?
             </p>
           </div>
