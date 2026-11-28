@@ -13,7 +13,17 @@ const sections: { id?: string; title: string; body: string[] }[] = [
   {
     title: 'The short version',
     body: [
-      'Off the Page does not collect your personal information. There is no account to create, no advertising, no analytics, and no tracking. We do not run servers that receive your notes, recordings, or files.',
+      'Off the Page does not collect your personal information. There is no account to create, no advertising, no analytics, and no tracking. We do not run servers that receive your notes, recordings, or files. The one exception is optional: if you choose to post your Daily Challenge score to Today\'s High Score, that score is sent to this website, as described below.',
+    ],
+  },
+  {
+    id: 'high-score',
+    title: 'Posting to Today\'s High Score (the iPhone app)',
+    body: [
+      'After a Daily Challenge, the app asks whether you want to post your result. Nothing is sent unless you choose to post. If you do, the app sends only: which track (Sell It, Explain It or Interview It), the date, your score from 0 to 100, an optional short name or initials that you type yourself, and a random code the app makes for itself. The random code is not your Apple ID, device ID or advertising ID, and it is not linked to your name; we store only a one-way scrambled version of it, so the same phone can post once a day on each track. We never receive your audio, what you said, your résumé or any file.',
+      'The Today\'s High Score page (614restore.com/software/offthepage/results) shows only the best score posted that day on each track and, if the player typed one, the short name. Nobody else\'s name or score is listed. Names are limited to 12 characters and checked for words that are not allowed; if a name is not allowed, the score is shown as Anonymous. Scores are posted by players from their own phones and are not verified.',
+      'You can also share a link to your result. That link carries only what you chose to include: your score and the track and day, and, if you pick that option, how many tries you did and Zedd\'s one-line feedback. The link works anywhere you send it. We don\'t save it beyond ordinary web server logs.',
+      'Posted scores are deleted after about three days and are not used for advertising or sold. To have a posted score or name removed, email ' + SUPPORT_EMAIL + ' with the track, date and score.',
     ],
   },
   {

@@ -31,7 +31,8 @@ export async function GET(request: Request) {
   const promptText = shared ? shared.prompt.prompt : 'Sell it. Explain it. Nail the interview question. Out loud, in under a minute.'
   const promptSize = promptText.length > 70 ? 40 : 46
   const verdict = shared?.verdict ? `“${shared.verdict.replace(/'/g, '’')}”` : '“Think you can talk your way past me?” — Zedd'
-  const label = shared ? `${TRACK_TITLES[shared.track].toUpperCase()} · ${formatDate(shared.date)}` : 'A NEW CHALLENGE EVERY DAY'
+  const triesText = shared?.tries ? ` · ${shared.tries} ${shared.tries === 1 ? 'TRY' : 'TRIES'}` : ''
+  const label = shared ? `${TRACK_TITLES[shared.track].toUpperCase()} · ${formatDate(shared.date)}${triesText}` : 'A NEW CHALLENGE EVERY DAY'
   const footer = 'Can you beat it? 614restore.com/software/offthepage'
   const allText = ['OFF THE PAGE DAILY CHALLENGE', label, promptText, score, verdict, 'Learn it. Say it. Land it.', footer].join(' ')
   const weights = [400, 600, 700, 800] as const
