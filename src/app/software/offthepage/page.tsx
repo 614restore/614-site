@@ -10,7 +10,7 @@ import { shareParams } from './_daily/share'
 const metadata: Metadata = {
   title: 'Off the Page: Read Aloud, Study & Interview Prep | 614 Restore',
   description:
-    'Off the Page for iPhone and iPad reads anything aloud, records lectures, turns notes into study guides, spaced-repetition flashcards and practice tests, runs study rooms over FaceTime, and coaches you for interviews. Free 3-day trial, then a one-time $9.99 unlock, $4.99 at launch.',
+    'Off the Page for iPhone and iPad reads anything aloud, records lectures, turns notes into study guides, spaced-repetition flashcards and practice tests, runs study rooms over FaceTime, and coaches you for interviews. Free 3-day trial, then a one-time $9.99 unlock, $1.99 for a limited time.',
   openGraph: {
     title: 'Off the Page: Hear it. Study it. Land the job.',
     description:
@@ -137,7 +137,7 @@ const featureGroups = [
 ]
 
 const advantages = [
-  ['One price', '$9.99 once after a free 3-day trial, and $4.99 at launch. No subscription, nothing charged automatically.'],
+  ['One price', '$9.99 once after a free 3-day trial, and $1.99 for a limited time. No subscription, nothing charged automatically.'],
   ['Remembers for you', 'Zedd brings back the cards you’re about to forget. Cards you miss come back sooner; cards you know wait days.'],
   ['Private by design', 'No account, no tracking, no Off the Page server. AI runs on your device by default.'],
   ['Works offline', 'Voices, transcripts and on-device AI work without internet.'],
@@ -149,7 +149,7 @@ const advantages = [
 const faqs = [
   {
     q: 'How much does it cost?',
-    a: 'Off the Page is a free download with a 3-day free trial of every feature. After that, a one-time Lifetime unlock keeps everything: $9.99, or $4.99 at launch through December 31, 2026. There is no subscription, and nothing is charged automatically.',
+    a: 'Off the Page is a free download with a 3-day free trial of every feature. After that, a one-time Lifetime unlock keeps everything: $9.99, or $1.99 for a limited time. There is no subscription, and nothing is charged automatically.',
   },
   {
     q: 'Does it use spaced repetition?',
@@ -223,7 +223,7 @@ export default function OffThePagePage() {
                 Features (PDF)
               </a>
             </div>
-            <p className="text-white/60 text-sm mt-3">Free download · 3-day free trial · Launch price $4.99 once (regular $9.99) · No subscription</p>
+            <p className="text-white/60 text-sm mt-3">Free download · 3-day free trial · Limited-time price $1.99 once (regular $9.99) · No subscription</p>
           </div>
           <div className="flex justify-center gap-4">
             <img
@@ -333,7 +333,7 @@ export default function OffThePagePage() {
           />
           <div className="flex-1">
             <h2 className="text-2xl font-heading font-bold mb-2">Try everything free for 3 days</h2>
-            <p className="text-white/80 mb-5">Then keep it forever for $4.99 at launch (regular $9.99). No account to create.</p>
+            <p className="text-white/80 mb-5">Then keep it forever for $1.99 for a limited time (regular $9.99). No account to create.</p>
             <AppStoreButton
               href={APP_STORE_URL}
               app="Off the Page"
